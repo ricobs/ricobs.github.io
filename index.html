@@ -14,33 +14,31 @@
         body { font-family: 'Inter', sans-serif; background-color: #F8F9FA; color: #1a1a1a; overflow-x: hidden; scroll-behavior: smooth; }
         header h1 { color: #1a1a1a; letter-spacing: -0.05em; }
         
-        /* Navigation Styles */
         .tab-button { @apply px-6 py-2 text-sm font-bold transition-all cursor-pointer rounded-full border border-gray-200; color: #4B5563; outline: none; }
         .tab-button.active { @apply bg-black text-white border-black shadow-lg; }
         .tab-button:hover:not(.active) { @apply bg-gray-100; }
         
-        /* Layout Sections */
-        .tab-content { display: none; background: #FFFFFF; @apply p-10 sm:p-16 rounded-[3rem] shadow-xl border border-gray-100; animation: slideUp 0.4s ease-out; }
+        .tab-content { display: none; background: #FFFFFF; @apply p-8 sm:p-16 rounded-[3rem] shadow-xl border border-gray-100; animation: slideUp 0.4s ease-out; }
         .tab-content.active { display: block !important; }
         
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Career Timeline */
         .timeline-item { @apply relative pl-12 border-l-2 border-gray-100 pb-12 last:pb-0; }
         .timeline-dot { @apply absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-black ring-8 ring-white; }
 
-        /* Status Badges */
         .badge { @apply inline-block text-[10px] font-black px-3 py-1 rounded-md mb-2 uppercase tracking-widest; }
         .startup-badge { @apply bg-amber-100 text-amber-900; }
         .enterprise-badge { @apply bg-blue-100 text-blue-900; }
         .local-badge { @apply bg-green-100 text-green-900; }
 
         /* Credentials Shuffler */
-        .shuffler-container { position: relative; width: 100%; height: 550px; @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center; }
+        .shuffler-container { position: relative; width: 100%; height: 500px; @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center; }
         .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease; @apply flex flex-col items-center justify-center p-8; z-index: 1; }
         .shuffler-item.active { opacity: 1; z-index: 10; }
         .shuffler-item img { @apply max-w-full max-h-[85%] object-contain rounded shadow-2xl mb-4 border-2 border-white/5; }
         .shuffler-caption { @apply text-gray-400 text-xs font-bold uppercase tracking-widest text-center; }
+
+        .service-card { @apply p-8 bg-gray-50 border border-gray-100 rounded-3xl transition-all hover:shadow-md hover:bg-white; }
     </style>
 </head>
 <body class="p-4 sm:p-10 lg:p-20 max-w-6xl mx-auto">
@@ -59,7 +57,7 @@
         <button class="tab-button active" onclick="showTab('vision', this)">The Mission</button>
         <button class="tab-button" onclick="showTab('journey', this)">Full Experience</button>
         <button class="tab-button" onclick="showTab('vouched', this)">Credentials</button>
-        <button class="tab-button" onclick="showTab('connect', this)">Contact</button>
+        <button class="tab-button" onclick="showTab('connect', this)">Services & Connect</button>
     </nav>
 
     <main id="portal">
@@ -69,22 +67,19 @@
                 <div>
                     <h2 class="text-4xl font-black mb-8 leading-tight italic">Precision at scale. <br><span class="text-gray-400 font-medium not-italic">Integrity in the details.</span></h2>
                     <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                        I serve as a <strong>Database Administrator for Gainwell Technologies</strong>, where I oversee the data lifecycles for New York State Medicaid. This involves securing <strong>$9M+ in monthly revenue recovery</strong>—a role where precision directly impacts public service.
+                        I serve as a <strong>Database Administrator for Gainwell Technologies</strong>, overseeing data lifecycles for New York State Medicaid. I secure <strong>$9M+ in monthly revenue recovery</strong>—where precision directly impacts public service.
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        Beyond the enterprise, I am a builder. I was <strong>Employee #107</strong> at a high-growth startup, following a vision from the ground floor. I’ve carried that same passion into my local community, helping friends and small business owners migrate data, clean complex sheets, and manage contractual databases.
+                        Beyond the enterprise, I am a builder. I was <strong>Employee #107</strong> at a high-growth startup, following a vision from the ground floor. Today, I carry that same passion into my local community, helping businesses migrate data and clean complex sheets.
                     </p>
                 </div>
                 <div class="bg-gray-50 p-10 rounded-[2rem] border border-gray-100">
-                    <h3 class="font-bold text-sm uppercase tracking-widest mb-6 text-gray-400">Strategic Impact</h3>
-                    <div class="space-y-8">
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-6 text-gray-400 text-center">Data Integrity Workflow</h3>
+                    
+                    <div class="space-y-8 mt-6">
                         <div>
                             <p class="text-4xl font-black">$9,000,000+</p>
                             <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Monthly Managed Public Revenue</p>
-                        </div>
-                        <div>
-                            <p class="text-4xl font-black">25,000+</p>
-                            <p class="text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-1">Manual Labor Hours Reclaimed</p>
                         </div>
                         <div>
                             <p class="text-4xl font-black">Contractual</p>
@@ -98,13 +93,12 @@
         <section id="journey" class="tab-content">
             <h2 class="text-4xl font-black mb-12 uppercase tracking-tighter">Professional History</h2>
             <div class="max-w-4xl">
-                
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <span class="badge enterprise-badge">Enterprise Oversight</span>
                     <h3 class="text-2xl font-black">Database Administrator | Gainwell Technologies</h3>
                     <p class="text-sm font-bold text-gray-400 uppercase mb-3 italic">NY State Medicaid | 2025 - Present</p>
-                    <p class="text-gray-600">Guarding the financial integrity of state-level healthcare data. High-stakes SQL optimization and revenue lifecycle management.</p>
+                    <p class="text-gray-600">Guarding the financial integrity of state-level healthcare data through high-stakes SQL optimization and revenue lifecycle management.</p>
                 </div>
 
                 <div class="timeline-item">
@@ -112,7 +106,7 @@
                     <span class="badge startup-badge">Startup Foundry</span>
                     <h3 class="text-2xl font-black">Enterprise Data Analyst | Stride (via Tech Elevator)</h3>
                     <p class="text-sm font-bold text-gray-400 uppercase mb-3">Employee #107 | 2023 - 2024</p>
-                    <p class="text-gray-600">Joined a vision I believed in. Developed Python-driven reporting and SQL pipelines to eliminate revenue leakage during aggressive scaling phases.</p>
+                    <p class="text-gray-600">Built Python-driven reporting and SQL pipelines from scratch to track data movement and eliminate revenue leakage during aggressive growth.</p>
                 </div>
 
                 <div class="timeline-item">
@@ -120,125 +114,91 @@
                     <span class="badge local-badge">Local Partnership</span>
                     <h3 class="text-2xl font-black">Contract Data Consultant | Small Business Solutions</h3>
                     <p class="text-sm font-bold text-gray-400 uppercase mb-3">Community-Focused | Ongoing</p>
-                    <p class="text-gray-600">Contractual data migration projects for local businesses. Specializing in cleaning "nightmare" data sheets and building custom management databases for friends and local shops.</p>
+                    <p class="text-gray-600">Cleaning "nightmare" data sheets and migrating legacy records to secure cloud databases for local businesses and friends.</p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <h3 class="text-2xl font-black">QA Analyst | Ritchie Bros. Global</h3>
                     <p class="text-sm font-bold text-gray-400 uppercase mb-3">Asset Logic | 2024 - 2025</p>
-                    <p class="text-gray-600">Global asset data verification. Ensured title logic and data synchronization for multi-billion dollar industrial auctions.</p>
+                    <p class="text-gray-600">Verified global asset logic and title synchronization for multi-billion dollar industrial auctions.</p>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h3 class="text-2xl font-black">Business Analyst (Contract) | Tech Elevator</h3>
-                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">Strategic Ops | 2022 - 2023</p>
-                    <p class="text-gray-600">Audited educational and operational data to improve student and partner outcomes through visualization and dashboarding.</p>
-                </div>
-
             </div>
         </section>
 
         <section id="vouched" class="tab-content">
-            <h2 class="text-4xl font-black mb-4 text-center uppercase tracking-tighter">Global & Local Trust</h2>
+            <h2 class="text-4xl font-black mb-4 text-center uppercase tracking-tighter">Global Trust</h2>
             <p class="text-center text-gray-400 mb-12 uppercase text-[10px] font-black tracking-[0.2em]">Verified by Leaders at Google, Tech Elevator, and the Cleveland Public Library</p>
-            
             <div class="shuffler-container" id="credential-shuffler">
-                <div class="shuffler-item active">
-                    <img src="reference5.jpg">
-                    <span class="shuffler-caption">Recommendation: Senior Revenue Strategist</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference7.png">
-                    <span class="shuffler-caption">Endorsement: Google UX Research</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference2.jpg">
-                    <span class="shuffler-caption">960-Hour Data Science Certification</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference4.png">
-                    <span class="shuffler-caption">HubSpot Revenue Reporting Certification</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference1.jpg">
-                    <span class="shuffler-caption">Camtasia Technical Communication Mastery</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference3.jpg">
-                    <span class="shuffler-caption">Recommendation: Business Operations Leader</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference6.png">
-                    <span class="shuffler-caption">Recommendation: Executive Director</span>
-                </div>
-                <div class="shuffler-item">
-                    <img src="reference8.png">
-                    <span class="shuffler-caption">Peer Review: Software Engineering</span>
-                </div>
+                <div class="shuffler-item active"><img src="reference5.jpg"><span class="shuffler-caption">Senior Revenue Strategy Recommendation</span></div>
+                <div class="shuffler-item"><img src="reference7.png"><span class="shuffler-caption">Google UX Research Endorsement</span></div>
+                <div class="shuffler-item"><img src="reference2.jpg"><span class="shuffler-caption">Data Science Mastery Certification</span></div>
+                <div class="shuffler-item"><img src="reference4.png"><span class="shuffler-caption">HubSpot Revenue Operations Mastery</span></div>
+                <div class="shuffler-item"><img src="reference1.jpg"><span class="shuffler-caption">Camtasia Technical Communication Mastery</span></div>
+                <div class="shuffler-item"><img src="reference3.jpg"><span class="shuffler-caption">Business Operations Leader Recommendation</span></div>
+                <div class="shuffler-item"><img src="reference6.png"><span class="shuffler-caption">Executive Director Recommendation</span></div>
+                <div class="shuffler-item"><img src="reference8.png"><span class="shuffler-caption">Systems Engineering Peer Review</span></div>
             </div>
         </section>
 
         <section id="connect" class="tab-content">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-5xl font-black mb-8 leading-tight">Build the <span class="text-gray-400">Next Dream.</span></h2>
-                <div class="bg-black p-16 rounded-[3rem] shadow-2xl">
-                    <p class="text-gray-300 text-2xl mb-12 font-medium">From public sector infrastructure to your local business database—let's secure your data together.</p>
-                    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                        <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl transition-all uppercase">🦅 Start a Dialogue</a>
-                        <a href="mailto:rodricobs@gmail.com" class="w-full sm:w-auto border border-gray-700 text-white py-6 px-12 rounded-2xl font-bold hover:bg-gray-900 transition-all uppercase">Send Email</a>
-                    </div>
+            <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-tighter">Solutions Menu</h2>
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="service-card">
+                    <div class="text-amber-500 mb-4 font-black text-xl">01</div>
+                    <h4 class="font-bold mb-2">The Spreadsheet Rescue</h4>
+                    <p class="text-gray-500 text-sm">Cleaning and structuring messy Excel/Google sheets into professional systems for local businesses.</p>
+                </div>
+                <div class="service-card">
+                    <div class="text-blue-500 mb-4 font-black text-xl">02</div>
+                    <h4 class="font-bold mb-2">Legacy Migration</h4>
+                    <p class="text-gray-500 text-sm">Moving business data from old hardware to modern, secure cloud environments with zero row loss.</p>
+                </div>
+                <div class="service-card">
+                    <div class="text-green-500 mb-4 font-black text-xl">03</div>
+                    <h4 class="font-bold mb-2">Revenue Automation</h4>
+                    <p class="text-gray-500 text-sm">Enterprise-grade logic used to identify revenue leakage and automate monthly reporting pipelines.</p>
+                </div>
+            </div>
+
+            <div class="bg-black p-16 rounded-[3rem] shadow-2xl text-center">
+                <h2 class="text-white text-5xl font-black mb-8 leading-tight">Scale the Vision.</h2>
+                <p class="text-gray-300 text-xl mb-12">From state-level Medicaid to your local shop—let's secure your data.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                    <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl transition-all uppercase">🦅 Book Strategy Call</a>
+                    <a href="mailto:rodricobs@gmail.com" class="w-full sm:w-auto border border-gray-700 text-white py-6 px-12 rounded-2xl font-bold hover:bg-gray-900 transition-all uppercase">Send Email</a>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <footer class="mt-32 py-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6">
-        <p class="text-gray-400 font-bold text-[10px] uppercase tracking-[0.4em]">RICOBS | WORLD-CLASS INTEGRITY</p>
-        <p class="text-gray-300 text-[10px] font-black uppercase tracking-widest">&copy; <span id="year"></span> | Albany to the World.</p>
+    <footer class="mt-32 py-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
+        <p>RICOBS | WORLD-CLASS DATA INTEGRITY</p>
+        <p>&copy; <span id="year"></span> | From Albany to the World.</p>
     </footer>
 
     <script>
         let slideInterval;
-
         function showTab(tabId, btn) {
-            // Clear all active states
             document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            
-            // Set new active state
-            const target = document.getElementById(tabId);
-            if(target) {
-                target.classList.add('active');
-                btn.classList.add('active');
-            }
-
-            // Reset Shuffler if tab is Credentials
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
             clearInterval(slideInterval);
-            if (tabId === 'vouched') {
-                startShuffler();
-            }
+            if (tabId === 'vouched') startShuffler();
         }
-
         function startShuffler() {
             const items = document.querySelectorAll('.shuffler-item');
             let index = 0;
             if (items.length === 0) return;
-            
-            // Reset to first slide
             items.forEach(i => i.classList.remove('active'));
             items[0].classList.add('active');
-            
             slideInterval = setInterval(() => {
                 items[index].classList.remove('active');
                 index = (index + 1) % items.length;
                 items[index].classList.add('active');
             }, 3000);
         }
-
-        // Set the year
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
