@@ -27,22 +27,34 @@
         
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
+        /* Credentials & Slideshow Logic */
+        .showcase-grid { @apply grid lg:grid-cols-2 gap-8; }
+        .shuffler-container { position: relative; width: 100%; height: 480px; @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center border-8 border-white shadow-2xl transition-transform hover:scale-[1.01]; }
+        .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease-in-out; @apply flex flex-col items-center justify-center p-6 cursor-zoom-in; visibility: hidden; }
+        .shuffler-item.active { opacity: 1; visibility: visible; }
+        .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg shadow-2xl; }
+
+        .progress-bar-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
+        .progress-filler { height: 100%; background: var(--terracotta); width: 0%; transition: width 4000ms linear; }
+        
+        .shuffler-container:hover .progress-filler, 
+        .shuffler-container.paused .progress-filler { transition: none !important; width: 0% !important; }
+        .active .progress-filler { width: 100%; }
+
+        .slide-counter { position: absolute; top: 20px; right: 20px; @apply bg-white/10 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-white/20 z-10; }
+        .hard-pause-btn { position: absolute; bottom: 20px; right: 20px; @apply z-20 bg-white/10 hover:bg-white/30 backdrop-blur-md text-white px-4 py-2 rounded-xl border border-white/20 text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer flex items-center gap-2; }
+        .shuffler-container.paused .hard-pause-btn { @apply bg-orange-600 text-white border-orange-400; }
+
+        /* Lightbox Styles */
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; @apply flex items-center justify-center p-4 sm:p-20; animation: fadeIn 0.3s ease; }
+        #lightbox img { @apply max-w-full max-h-full rounded-xl shadow-2xl; }
+        #lightbox-close { position: absolute; top: 30px; right: 30px; @apply text-white text-4xl font-light cursor-pointer hover:text-orange-600 transition-colors; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Timeline & Accents */
         .timeline-item { @apply relative pl-12 border-l-2 border-gray-200 pb-12 last:pb-0; }
         .timeline-dot { @apply absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-orange-600 ring-8 ring-white; }
-
         .badge { @apply inline-block text-[10px] font-black px-3 py-1 rounded-md mb-2 uppercase tracking-widest; }
-        .startup-badge { background-color: #FEF3C7; color: #92400E; }
-        .enterprise-badge { background-color: #DBEAFE; color: #1E40AF; }
-        .local-badge { background-color: #D1FAE5; color: #065F46; }
-
-        /* Credentials Dual-Slider */
-        .showcase-grid { @apply grid lg:grid-cols-2 gap-8; }
-        .shuffler-container { position: relative; width: 100%; height: 400px; @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center border-4 border-white shadow-xl; }
-        .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease-in-out; @apply flex flex-col items-center justify-center p-4; visibility: hidden; }
-        .shuffler-item.active { opacity: 1; visibility: visible; }
-        .shuffler-item img { @apply max-w-full max-h-[90%] object-contain rounded shadow-lg; }
-        
-        .service-card { @apply p-8 bg-gray-50 border border-gray-100 rounded-3xl transition-all hover:border-orange-200 hover:bg-white; }
         .cactus-accent { color: var(--terracotta); }
     </style>
 </head>
@@ -56,7 +68,7 @@
             </div>
             <h1 class="text-7xl sm:text-8xl font-black mb-4 uppercase tracking-tighter" style="color: var(--cactus-green);">RICOBS</h1>
             <p class="text-xl text-gray-600 font-medium max-w-3xl leading-relaxed">
-                <span class="cactus-accent font-bold">Data Integrity Specialist.</span> Securing state infrastructure and helping local dreams survive the digital migration.
+                <span class="cactus-accent font-bold">Data Integrity Specialist.</span> Visionary oversight for state-level revenue and startup growth systems.
             </p>
         </div>
     </header>
@@ -69,181 +81,128 @@
     </nav>
 
     <main id="portal">
-        
         <section id="vision" class="tab-content active">
             <div class="grid lg:grid-cols-2 gap-16 items-start">
                 <div>
                     <h2 class="text-4xl font-black mb-8 leading-tight italic" style="color: var(--cactus-green);">Vision with Resilience.</h2>
                     <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                        I serve as a <strong>Database Administrator for Gainwell Technologies</strong>, overseeing data lifecycles for New York State Medicaid to secure <strong>$9M+ in monthly revenue recovery</strong>. 
+                        Protecting <strong>$9M+ in monthly recoveries</strong> for NY State Medicaid at Gainwell Technologies through precise data lifecycle management.
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        My practice is defined by "The Eagle & The Cactus"—high-level vision paired with the resilience to handle messy, legacy data environments. Whether it's enterprise health data or a local shop's spreadsheet nightmare, I ensure the integrity of the record.
+                        From legacy hardware to modern cloud pipelines, I ensure the integrity of the record is never compromised.
                     </p>
                 </div>
-                <div class="bg-stone-50 p-10 rounded-[2rem] border border-stone-200">
-                    <h3 class="font-bold text-sm uppercase tracking-widest mb-10 text-gray-400 text-center">Core Impact Portfolio</h3>
-                    <div class="grid grid-cols-2 gap-8 text-center">
-                        <div>
-                            <p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p>
-                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Monthly Revenue Oversight</p>
-                        </div>
-                        <div>
-                            <p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p>
-                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Early Startup Hire</p>
-                        </div>
-                        <div>
-                            <p class="text-4xl font-black">960+</p>
-                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Data Science Hours</p>
-                        </div>
-                        <div>
-                            <p class="text-4xl font-black">24/7</p>
-                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Integrity Standards</p>
-                        </div>
+                <div class="bg-stone-50 p-10 rounded-[2rem] border border-stone-200 text-center">
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-10 text-gray-400">Core Impact</h3>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div><p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p><p class="text-[10px] font-bold text-gray-500 uppercase mt-1">Monthly Rev</p></div>
+                        <div><p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p><p class="text-[10px] font-bold text-gray-500 uppercase mt-1">Startup Hire</p></div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="journey" class="tab-content">
-            <h2 class="text-4xl font-black mb-12 uppercase tracking-tighter" style="color: var(--cactus-green);">Impact Timeline</h2>
-            <div class="max-w-4xl">
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background-color: var(--cactus-green);"></div>
-                    <span class="badge enterprise-badge">Public Sector Integrity</span>
-                    <h3 class="text-2xl font-black">Database Administrator | Gainwell Technologies</h3>
-                    <p class="text-sm font-bold text-orange-600 uppercase mb-3 italic">NY State Medicaid | 2025 – Present</p>
-                    <p class="text-gray-600">Managing state-level database lifecycles. Responsible for ensuring the accuracy of $9M+ in monthly financial recoveries for the public sector.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background-color: var(--terracotta);"></div>
-                    <span class="badge enterprise-badge">Global Logistics</span>
-                    <h3 class="text-2xl font-black">QA Analyst | Ritchie Bros. Global</h3>
-                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">Industrial Auction Logic | 2024 – 2025</p>
-                    <p class="text-gray-600">Verified global asset logic and title synchronization for multi-billion dollar industrial auctions across diverse international regions.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background-color: var(--cactus-green);"></div>
-                    <span class="badge startup-badge">Early Startup Growth</span>
-                    <h3 class="text-2xl font-black">Enterprise Data Analyst | Stride (via Tech Elevator)</h3>
-                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">Employee #107 | 2022 – 2024</p>
-                    <p class="text-gray-600">Joined a vision early. Reconstructed revenue reporting and built SQL/Python pipelines to eliminate revenue leakage during a period of massive scaling.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background-color: #000;"></div>
-                    <span class="badge local-badge">Systems & Communication</span>
-                    <h3 class="text-2xl font-black">Business Analyst | Tech Elevator</h3>
-                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">Strategic Operations | 2021 – 2022</p>
-                    <p class="text-gray-600">Built the foundation for outcomes tracking and operational data visualization. Praised for the ability to translate technical data for executive leadership.</p>
                 </div>
             </div>
         </section>
 
         <section id="vouched" class="tab-content">
             <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-tighter">Vouched & Verified</h2>
-            
             <div class="showcase-grid">
-                <div>
-                    <h4 class="text-[10px] font-black uppercase tracking-widest mb-4 text-center text-gray-400">Certifications</h4>
+                <div class="space-y-4">
+                    <h4 class="text-[10px] font-black uppercase text-center text-gray-400">Certifications</h4>
                     <div class="shuffler-container" id="cert-shuffler">
-                        <div class="shuffler-item active"><img src="reference2.jpg"></div>
-                        <div class="shuffler-item"><img src="reference4.png"></div>
-                        <div class="shuffler-item"><img src="reference1.jpg"></div>
+                        <div class="slide-counter"><span>1</span> / 3</div>
+                        <button class="hard-pause-btn" onclick="togglePause('cert-shuffler', this, event)">
+                            <span class="btn-icon">⏸</span> <span class="btn-text">Pause</span>
+                        </button>
+                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference1.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference2.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference4.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                     </div>
                 </div>
-                <div>
-                    <h4 class="text-[10px] font-black uppercase tracking-widest mb-4 text-center text-gray-400">Professional Recommendations</h4>
+
+                <div class="space-y-4">
+                    <h4 class="text-[10px] font-black uppercase text-center text-gray-400">Professional Recommendations</h4>
                     <div class="shuffler-container" id="reco-shuffler">
-                        <div class="shuffler-item active"><img src="reference5.jpg"></div>
-                        <div class="shuffler-item"><img src="reference7.png"></div>
-                        <div class="shuffler-item"><img src="reference3.jpg"></div>
-                        <div class="shuffler-item"><img src="reference6.png"></div>
-                        <div class="shuffler-item"><img src="reference8.png"></div>
+                        <div class="slide-counter"><span>1</span> / 5</div>
+                        <button class="hard-pause-btn" onclick="togglePause('reco-shuffler', this, event)">
+                            <span class="btn-icon">⏸</span> <span class="btn-text">Pause</span>
+                        </button>
+                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference3.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference5.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference6.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference7.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference8.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="connect" class="tab-content">
-            <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-tighter" style="color: var(--cactus-green);">Get Started</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="service-card">
-                    <div class="mb-4 font-black text-xl" style="color: var(--terracotta);">01</div>
-                    <h4 class="font-bold mb-2">The Spreadsheet Rescue</h4>
-                    <p class="text-gray-500 text-sm">Turning chaotic local business sheets into clean, cloud-ready database structures.</p>
-                </div>
-                <div class="service-card">
-                    <div class="mb-4 font-black text-xl" style="color: var(--cactus-green);">02</div>
-                    <h4 class="font-bold mb-2">Legacy Migration</h4>
-                    <p class="text-gray-500 text-sm">Expert oversight for moving data from aging local hardware to secure cloud environments.</p>
-                </div>
-                <div class="service-card">
-                    <div class="mb-4 font-black text-xl" style="color: #1E40AF;">03</div>
-                    <h4 class="font-bold mb-2">Revenue Lifecycle Ops</h4>
-                    <p class="text-gray-500 text-sm">Identifying revenue leaks through SQL auditing and Python-based automation.</p>
-                </div>
-            </div>
-
-            <div class="bg-neutral-900 p-16 rounded-[3rem] shadow-2xl text-center border-t-8 border-orange-600">
+            <div class="bg-neutral-900 p-16 rounded-[3rem] text-center border-t-8 border-orange-600">
                 <h2 class="text-white text-5xl font-black mb-8 leading-tight">Scale with Integrity.</h2>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                    <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl transition-all uppercase flex items-center justify-center gap-3">
-                        🦅 Book Strategy Meeting
-                    </a>
-                    <a href="mailto:rodricobs@gmail.com" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl transition-all uppercase flex items-center justify-center gap-3">
-                        🌵 Email Rico
-                    </a>
+                    <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl">🦅 Book Strategy Meeting</a>
+                    <a href="mailto:rodricobs@gmail.com" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl">🌵 Email Rico</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="mt-32 py-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
-        <p>RICOBS | MISSION-CRITICAL DATA</p>
-        <p>&copy; <span id="year"></span> | Vision from the ground up.</p>
-    </footer>
+    <div id="lightbox" onclick="closeLightbox()">
+        <div id="lightbox-close">&times;</div>
+        <img id="lightbox-img" src="">
+    </div>
 
     <script>
-        let slideIntervals = [];
+        let slideStates = {
+            'cert-shuffler': { interval: null, index: 0, isPaused: false },
+            'reco-shuffler': { interval: null, index: 0, isPaused: false }
+        };
+
+        let isLightboxOpen = false;
 
         function showTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
-            
-            // Reset intervals
-            slideIntervals.forEach(interval => clearInterval(interval));
-            slideIntervals = [];
-            
+            Object.keys(slideStates).forEach(id => clearInterval(slideStates[id].interval));
             if (tabId === 'vouched') {
-                setTimeout(() => {
-                    startShuffler('cert-shuffler');
-                    startShuffler('reco-shuffler');
-                }, 50);
+                setTimeout(() => { startInterval('cert-shuffler'); startInterval('reco-shuffler'); }, 100);
             }
         }
 
-        function startShuffler(containerId) {
-            const items = document.querySelectorAll(`#${containerId} .shuffler-item`);
-            let index = 0;
-            if (items.length === 0) return;
+        function startInterval(id) {
+            const container = document.getElementById(id);
+            const items = container.querySelectorAll('.shuffler-item');
+            const counter = container.querySelector('.slide-counter span');
+            slideStates[id].interval = setInterval(() => {
+                if (!slideStates[id].isPaused && !container.matches(':hover') && !isLightboxOpen) {
+                    items[slideStates[id].index].classList.remove('active');
+                    slideStates[id].index = (slideStates[id].index + 1) % items.length;
+                    items[slideStates[id].index].classList.add('active');
+                    counter.innerText = slideStates[id].index + 1;
+                }
+            }, 4000);
+        }
 
-            items.forEach(i => i.classList.remove('active'));
-            items[0].classList.add('active');
+        function togglePause(id, btn, event) {
+            event.stopPropagation();
+            const container = document.getElementById(id);
+            slideStates[id].isPaused = !slideStates[id].isPaused;
+            container.classList.toggle('paused', slideStates[id].isPaused);
+            btn.querySelector('.btn-icon').innerText = slideStates[id].isPaused ? '▶' : '⏸';
+            btn.querySelector('.btn-text').innerText = slideStates[id].isPaused ? 'Resume' : 'Pause';
+        }
 
-            const interval = setInterval(() => {
-                items[index].classList.remove('active');
-                index = (index + 1) % items.length;
-                items[index].classList.add('active');
-            }, 3000 + (Math.random() * 1000)); // Staggered timing for organic feel
-            
-            slideIntervals.push(interval);
+        function openLightbox(el) {
+            const imgPath = el.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgPath;
+            document.getElementById('lightbox').style.display = 'flex';
+            isLightboxOpen = true;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            isLightboxOpen = false;
         }
 
         document.getElementById('year').textContent = new Date().getFullYear();
