@@ -20,173 +20,215 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--desert-sand); color: var(--midnight); overflow-x: hidden; scroll-behavior: smooth; }
         
         /* Navigation */
-        .tab-button { @apply px-6 py-2 text-sm font-bold transition-all cursor-pointer rounded-full border border-gray-300; color: var(--cactus-green); outline: none; }
-        .tab-button.active { background-color: var(--cactus-green); color: white; border-color: var(--cactus-green); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .tab-button { @apply px-8 py-3 text-sm font-black transition-all cursor-pointer rounded-full border border-stone-300 uppercase tracking-widest; color: var(--cactus-green); outline: none; }
+        .tab-button.active { background-color: var(--cactus-green); color: white; border-color: var(--cactus-green); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
         
-        .tab-content { display: none; background: #FFFFFF; @apply p-8 sm:p-16 rounded-[3rem] shadow-xl border border-gray-200/50; animation: slideUp 0.4s ease-out; }
+        .tab-content { display: none; background: #FFFFFF; @apply p-8 sm:p-20 rounded-[4rem] shadow-2xl border border-stone-200; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .tab-content.active { display: block !important; }
         
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Credentials Shuffler */
-        .showcase-grid { @apply grid lg:grid-cols-2 gap-8; }
-        .shuffler-container { position: relative; width: 100%; height: 520px; @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center border-8 border-white shadow-2xl transition-transform hover:scale-[1.01]; }
-        .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease-in-out; @apply flex flex-col items-center justify-center p-6 cursor-zoom-in; visibility: hidden; }
+        /* Credentials Shuffler - Clean Version */
+        .shuffler-container { position: relative; width: 100%; height: 500px; @apply rounded-[2rem] bg-stone-100 overflow-hidden flex items-center justify-center border-[12px] border-white shadow-xl; }
+        .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease-in-out; @apply flex items-center justify-center p-4; visibility: hidden; }
         .shuffler-item.active { opacity: 1; visibility: visible; }
-        .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg shadow-2xl; }
-
-        .progress-bar-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
-        .progress-filler { height: 100%; background: var(--terracotta); width: 0%; transition: width 4000ms linear; }
-        .shuffler-container:hover .progress-filler, .shuffler-container.paused .progress-filler { transition: none !important; width: 0% !important; }
-        .active .progress-filler { width: 100%; }
+        .shuffler-item img { @apply max-w-full max-h-full object-contain cursor-zoom-in; }
 
         /* Timeline Styles */
-        .timeline-item { @apply relative pl-12 border-l-2 border-gray-200 pb-12 last:pb-0; }
-        .timeline-dot { @apply absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-orange-600 ring-8 ring-white; }
-        .badge { @apply inline-block text-[10px] font-black px-3 py-1 rounded-md mb-2 uppercase tracking-widest; }
+        .timeline-item { @apply relative pl-16 border-l-4 border-stone-100 pb-16 last:pb-0; }
+        .timeline-dot { @apply absolute -left-[14px] top-1 h-6 w-6 rounded-full bg-stone-800 ring-8 ring-white; }
 
-        /* Fullscreen Lightbox */
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; @apply flex flex-col items-center justify-center p-4; animation: fadeIn 0.3s ease; }
-        #lightbox img { @apply max-w-[90%] max-h-[80%] rounded-xl shadow-2xl object-contain border-4 border-white/10; }
-        
         /* Contact Modal Styles */
-        #contact-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; @apply flex items-center justify-center p-6; backdrop-filter: blur(8px); }
+        #contact-modal { display: none; position: fixed; inset: 0; background: rgba(26, 28, 25, 0.9); z-index: 2000; @apply items-center justify-center p-6 backdrop-blur-md; }
         
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; @apply flex flex-col items-center justify-center p-4; }
+        #lightbox img { @apply max-w-[95%] max-h-[85%] object-contain; }
     </style>
 </head>
-<body class="p-4 sm:p-10 lg:p-20 max-w-6xl mx-auto">
+<body class="p-4 sm:p-10 lg:p-20 max-w-7xl mx-auto">
 
-    <header class="mb-20">
-        <div class="flex flex-col items-start">
-            <div class="relative cursor-pointer group" onclick="openLightboxFromSrc('ricobsdatabase.jpg')">
-                <img src="ricobsdatabase.jpg" alt="RICOBS Logo" class="h-40 w-40 object-contain mb-8 rounded-full border-4 border-white shadow-2xl bg-white transition-transform group-hover:scale-105">
-                <div class="absolute -bottom-2 -right-2 bg-orange-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">Est. 2021</div>
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 rounded-full text-white text-[10px] font-bold uppercase">View Logo</div>
+    <header class="mb-24">
+        <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
+            <div class="relative cursor-pointer group mb-10" onclick="openLightboxFromSrc('ricobsdatabase.jpg')">
+                <img src="ricobsdatabase.jpg" alt="RICOBS Logo" class="h-44 w-44 object-contain rounded-full border-8 border-white shadow-2xl bg-white transition-transform group-hover:scale-105">
+                <div class="absolute -bottom-2 -right-2 bg-orange-600 text-white text-[12px] font-black px-4 py-2 rounded-full uppercase tracking-tighter shadow-lg">Est. 2021</div>
             </div>
-            <h1 class="text-7xl sm:text-8xl font-black mb-4 uppercase tracking-tighter" style="color: var(--cactus-green);">RICOBS</h1>
-            <p class="text-xl text-gray-600 font-medium max-w-3xl leading-relaxed">
-                <span style="color: var(--terracotta);" class="font-bold">Data Integrity Specialist.</span> Safeguarding $9M+ in monthly state Medicaid revenue recovery through strategic oversight.
+            <h1 class="text-8xl sm:text-[10rem] font-black mb-6 uppercase tracking-tighter leading-none" style="color: var(--cactus-green);">RICOBS</h1>
+            <p class="text-2xl text-stone-500 font-medium max-w-3xl leading-relaxed">
+                <span style="color: var(--terracotta);" class="font-black">Data Integrity Specialist.</span> Safeguarding $9M+ in monthly financial recovery through strategic database architecture.
             </p>
         </div>
     </header>
 
-    <nav class="flex justify-start flex-wrap gap-3 mb-12">
+    <nav class="flex justify-center sm:justify-start flex-wrap gap-4 mb-16">
         <button class="tab-button active" onclick="showTab('vision', this)">The Mission</button>
-        <button class="tab-button" onclick="showTab('journey', this)">Experience</button>
+        <button class="tab-button" onclick="showTab('journey', this)">History</button>
         <button class="tab-button" onclick="showTab('vouched', this)">Credentials</button>
-        <button class="tab-button" onclick="showTab('connect', this)">Contact</button>
+        <button class="tab-button" onclick="showTab('connect', this)">Scheduling</button>
     </nav>
 
     <main id="portal">
         <section id="vision" class="tab-content active">
-            <div class="grid lg:grid-cols-2 gap-16 items-start">
-                <div>
-                    <h2 class="text-4xl font-black mb-8 leading-tight italic" style="color: var(--cactus-green);">The Eagle & The Cactus.</h2>
-                    <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
-                        <p>Currently acting as the <strong>Database Administrator for Gainwell Technologies</strong>, I hold the line on technical integrity to protect <strong>$9M+ in monthly financial recoveries</strong> for the State of New York.</p>
-                        <p>My philosophy is built on three strategic pillars:</p>
-                        <ul class="space-y-4">
-                            <li><strong class="text-black">01. Precision Custodianship:</strong> High-stakes data requires an eagle’s eye for detail.</li>
-                            <li><strong class="text-black">02. Revenue Continuity:</strong> Resilient as a cactus; I build systems that survive high-pressure environments.</li>
-                            <li><strong class="text-black">03. Scalable Logic:</strong> Transforming data into a catalyst for growth.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="space-y-6 text-center">
-                    <div class="bg-stone-50 p-10 rounded-[2rem] border border-stone-200">
-                        <div class="grid grid-cols-2 gap-8">
-                            <div><p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Monthly Recovery</p></div>
-                            <div><p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Startup Early Hire</p></div>
+            <div class="grid lg:grid-cols-12 gap-12 items-stretch">
+                <div class="lg:col-span-7">
+                    <span class="text-orange-600 font-black text-xs uppercase tracking-[0.3em] mb-4 block">Strategic Philosophy</span>
+                    <h2 class="text-6xl font-black mb-10 leading-[0.9] italic" style="color: var(--cactus-green);">The Eagle & <br>The Cactus.</h2>
+                    <p class="text-xl text-stone-600 mb-12 leading-relaxed">Currently acting as the <strong>Database Administrator for Gainwell Technologies</strong>, I orchestrate technical integrity for the State of New York’s Medicaid recovery systems.</p>
+                    
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div class="p-8 bg-stone-50 rounded-3xl border border-stone-100">
+                            <div class="text-3xl mb-4">🦅</div>
+                            <h4 class="font-black uppercase text-xs tracking-widest mb-2">Precision</h4>
+                            <p class="text-sm text-stone-500">Immutable verification for high-stakes records.</p>
+                        </div>
+                        <div class="p-8 bg-stone-50 rounded-3xl border border-stone-100">
+                            <div class="text-3xl mb-4">🌵</div>
+                            <h4 class="font-black uppercase text-xs tracking-widest mb-2">Resilience</h4>
+                            <p class="text-sm text-stone-500">Zero-loss systems built for high pressure.</p>
+                        </div>
+                        <div class="p-8 bg-stone-50 rounded-3xl border border-stone-100">
+                            <div class="text-3xl mb-4">⚡</div>
+                            <h4 class="font-black uppercase text-xs tracking-widest mb-2">Logic</h4>
+                            <p class="text-sm text-stone-500">Transforming raw data into revenue growth.</p>
                         </div>
                     </div>
-                    <blockquote class="border-l-4 border-orange-600 pl-6 italic text-gray-500 text-xl text-left">
-                        "Integrity isn't just about data points; it's about the trust those points represent."
-                    </blockquote>
+                </div>
+                <div class="lg:col-span-5 bg-stone-900 rounded-[3rem] p-12 text-white flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-black mb-6 leading-tight">Institutional Trust is built on Data Integrity.</h3>
+                        <p class="text-stone-400 leading-relaxed">I don't just manage databases; I secure the financial lifelines of state-level infrastructures.</p>
+                    </div>
+                    <div class="mt-12 space-y-8">
+                        <div>
+                            <p class="text-5xl font-black text-orange-600">$9M+</p>
+                            <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Monthly Oversight</p>
+                        </div>
+                        <div class="h-px bg-stone-800"></div>
+                        <div>
+                            <p class="text-5xl font-black" style="color: var(--cactus-green);">100%</p>
+                            <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Data Continuity</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="journey" class="tab-content">
-            <h2 class="text-4xl font-black mb-12 uppercase tracking-tighter" style="color: var(--cactus-green);">Professional Impact</h2>
-            <div class="max-w-4xl mx-auto">
+            <h2 class="text-5xl font-black mb-16 uppercase tracking-tighter text-stone-800">Complete History</h2>
+            <div class="max-w-4xl">
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--cactus-green);"></div>
-                    <span class="badge" style="background:#DBEAFE; color:#1E40AF">Current</span>
-                    <h3 class="text-2xl font-black">Database Administrator | Gainwell</h3>
-                    <p class="text-sm font-bold text-orange-600 uppercase mb-3">2025 – Present</p>
-                    <p class="text-gray-600">Managing database lifecycles for Medicaid financial recovery systems, protecting millions in monthly state revenue.</p>
+                    <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Current</span>
+                    <h3 class="text-3xl font-black mt-4">Database Administrator | Gainwell</h3>
+                    <p class="text-orange-600 font-bold text-sm mb-4">2025 – PRESENT</p>
+                    <p class="text-stone-600 text-lg">Overseeing critical database lifecycles for New York State Medicaid financial recoveries. Responsible for maintaining 100% uptime and data integrity for pipelines processing $9M+ monthly.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--terracotta);"></div>
-                    <span class="badge" style="background:#F3F4F6; color:#374151">Logistics</span>
-                    <h3 class="text-2xl font-black">QA Analyst | Ritchie Bros.</h3>
-                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">2024 – 2025</p>
-                    <p class="text-gray-600">Global industrial asset auction synchronization and cross-market data verification.</p>
+                    <span class="bg-stone-100 text-stone-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Global Ops</span>
+                    <h3 class="text-3xl font-black mt-4">QA Analyst | Ritchie Bros.</h3>
+                    <p class="text-stone-400 font-bold text-sm mb-4">2024 – 2025</p>
+                    <p class="text-stone-600 text-lg">Engineered logic synchronization for global industrial auctions. Performed high-volume data verification across international markets to ensure auction finality and financial accuracy.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background-color: #CBD5E1;"></div>
+                    <span class="bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Technical Foundation</span>
+                    <h3 class="text-3xl font-black mt-4">Apprentice | Tech Elevator</h3>
+                    <p class="text-stone-400 font-bold text-sm mb-4">2023</p>
+                    <p class="text-stone-600 text-lg">Immersive 800+ hour residency in full-stack Java development. Specialized in SQL database design, relational mapping, and enterprise software architecture.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background-color: #E2E8F0;"></div>
+                    <span class="bg-stone-100 text-stone-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Strategic Beginnings</span>
+                    <h3 class="text-3xl font-black mt-4">Early Startup Hire #107</h3>
+                    <p class="text-stone-400 font-bold text-sm mb-4">2021 – 2023</p>
+                    <p class="text-stone-600 text-lg">Instrumental in scaling operations during rapid growth phases. Focused on the intersection of data accuracy and operational efficiency.</p>
                 </div>
             </div>
         </section>
 
         <section id="vouched" class="tab-content">
-            <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-tighter">Vouched & Verified</h2>
-            <div class="showcase-grid">
-                <div class="space-y-4">
-                    <h4 class="text-[10px] font-black uppercase text-center text-gray-400 tracking-widest">Certifications</h4>
-                    <div class="shuffler-container" id="cert-shuffler">
-                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference1.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference2.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference4.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+            <h2 class="text-center text-4xl font-black mb-16 uppercase tracking-widest">Vouched & Verified</h2>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h4 class="text-[10px] font-black uppercase text-stone-400 tracking-[0.4em] text-center">Industry Certifications</h4>
+                    <div class="shuffler-container border-cactus-green" id="cert-shuffler">
+                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference1.png"></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference2.png"></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference4.png"></div>
                     </div>
                 </div>
-                <div class="space-y-4">
-                    <h4 class="text-[10px] font-black uppercase text-center text-gray-400 tracking-widest">Professional References</h4>
-                    <div class="shuffler-container" id="reco-shuffler">
-                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference3.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference5.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference6.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference7.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference8.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                <div class="space-y-6">
+                    <h4 class="text-[10px] font-black uppercase text-stone-400 tracking-[0.4em] text-center">Professional References</h4>
+                    <div class="shuffler-container border-terracotta" id="reco-shuffler">
+                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference3.png"></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference5.png"></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference6.png"></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference7.png"></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference8.png"></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="connect" class="tab-content">
-            <div class="bg-neutral-900 p-16 rounded-[3rem] text-center border-t-8 border-orange-600">
-                <h2 class="text-white text-5xl font-black mb-8 leading-tight">Growth with Integrity.</h2>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                    <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🦅 Strategy Call</a>
-                    <button onclick="toggleContactModal(true)" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🌵 Direct Email</button>
+            <div class="bg-stone-900 p-20 rounded-[4rem] text-center border-b-[16px] border-cactus-green">
+                <h2 class="text-white text-6xl font-black mb-10 leading-tight">Growth with Integrity.</h2>
+                <div class="flex flex-col items-center gap-8">
+                    <button onclick="toggleContactModal(true)" class="bg-white text-stone-900 font-black py-8 px-16 rounded-3xl shadow-2xl hover:bg-orange-600 hover:text-white transition-all text-xl uppercase tracking-widest">
+                        🌵 Access Scheduling Hub
+                    </button>
+                    <p class="text-stone-500 font-bold uppercase text-xs tracking-[0.5em]">Direct Access 24/7</p>
                 </div>
             </div>
         </section>
     </main>
 
     <div id="contact-modal" onclick="toggleContactModal(false)">
-        <div class="bg-white p-12 rounded-[3rem] max-w-lg w-full shadow-2xl text-center relative border-8 border-cactus-green" onclick="event.stopPropagation()">
-            <div class="text-6xl mb-6">🌵</div>
-            <h3 class="text-3xl font-black mb-4 uppercase tracking-tight">Business Solutions</h3>
-            <p class="text-gray-600 text-lg mb-8 leading-relaxed">
-                Reach out for data strategy, integrity projects, or partnership opportunities.
-            </p>
+        <div class="bg-white rounded-[3rem] max-w-2xl w-full p-12 shadow-2xl text-center relative border-[10px] border-cactus-green" onclick="event.stopPropagation()">
+            <h3 class="text-4xl font-black mb-8 uppercase tracking-tighter">Scheduling Hub</h3>
             
-            <div class="bg-stone-100 p-4 rounded-xl mb-8 flex items-center justify-between border border-stone-200">
-                <span id="email-text" class="font-bold text-midnight truncate mr-2">rodricobs@gmail.com</span>
-                <button id="copy-btn" onclick="copyEmailToClipboard()" class="bg-cactus-green text-white text-[10px] font-black px-4 py-2 rounded-lg uppercase tracking-widest hover:bg-orange-600 transition-colors shrink-0">
-                    Copy
+            <div class="grid gap-4 mb-10">
+                <a href="https://calendly.com/rodricobs/initial-meeting" target="_blank" class="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group text-left">
+                    <div>
+                        <h4 class="font-black text-lg">Initial Meeting</h4>
+                        <p class="text-sm text-stone-500">Introductory discussion & synergy check.</p>
+                    </div>
+                    <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
+                </a>
+                <a href="https://calendly.com/rodricobs/consulting" target="_blank" class="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group text-left">
+                    <div>
+                        <h4 class="font-black text-lg">Database Consulting</h4>
+                        <p class="text-sm text-stone-500">Deep dive into data lifecycle & architecture.</p>
+                    </div>
+                    <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
+                </a>
+                <a href="https://calendly.com/rodricobs/strategy" target="_blank" class="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group text-left">
+                    <div>
+                        <h4 class="font-black text-lg">Strategy Call</h4>
+                        <p class="text-sm text-stone-500">High-level growth & operational logic.</p>
+                    </div>
+                    <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
+                </a>
+            </div>
+
+            <div class="h-px bg-stone-100 mb-8"></div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 bg-stone-100 p-4 rounded-3xl">
+                <span class="font-black text-stone-900">rodricobs@gmail.com</span>
+                <button id="copy-btn" onclick="copyEmailToClipboard()" class="bg-stone-900 text-white font-black px-8 py-3 rounded-2xl uppercase text-[10px] tracking-widest hover:bg-orange-600 transition-colors">
+                    Click to Copy Email
                 </button>
             </div>
-            
-            <button onclick="toggleContactModal(false)" class="text-gray-400 font-bold uppercase text-[10px] tracking-widest hover:text-orange-600 transition-colors">Close View</button>
         </div>
     </div>
 
     <div id="lightbox" onclick="closeLightbox()">
-        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer hover:text-orange-600">&times;</div>
+        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
         <img id="lightbox-img" src="">
     </div>
 
-    <footer class="mt-20 text-center text-gray-400 text-[10px] uppercase tracking-widest">
+    <footer class="mt-24 text-center text-stone-400 text-[10px] font-black uppercase tracking-[0.5em]">
         &copy; <span id="year"></span> RICOBS | Data Lifecycle Strategy
     </footer>
 
@@ -234,28 +276,18 @@
         }
 
         function toggleContactModal(show) {
-            const modal = document.getElementById('contact-modal');
-            modal.style.display = show ? 'flex' : 'none';
-            // Reset button text if modal is opening
-            if(show) {
-                document.getElementById('copy-btn').innerText = 'Copy';
-            }
+            document.getElementById('contact-modal').style.display = show ? 'flex' : 'none';
         }
 
         function copyEmailToClipboard() {
-            const email = document.getElementById('email-text').innerText;
             const btn = document.getElementById('copy-btn');
-            
-            navigator.clipboard.writeText(email).then(() => {
-                btn.innerText = 'Copied!';
-                btn.style.backgroundColor = '#D97757'; // Change to terracotta for visual cue
-                
+            navigator.clipboard.writeText('rodricobs@gmail.com').then(() => {
+                btn.innerText = 'Copied to Clipboard!';
+                btn.style.backgroundColor = '#4A6741';
                 setTimeout(() => {
-                    btn.innerText = 'Copy';
-                    btn.style.backgroundColor = '#4A6741'; // Reset to cactus green
+                    btn.innerText = 'Click to Copy Email';
+                    btn.style.backgroundColor = '#1A1C19';
                 }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
             });
         }
 
