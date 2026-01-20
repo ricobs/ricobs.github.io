@@ -195,4 +195,51 @@
 
     </main>
 
-    <footer class="mt-32 py-12 border-t border-gray-
+    <footer class="mt-32 py-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <p class="text-gray-400 font-bold text-[10px] uppercase tracking-[0.4em]">RICOBS | WORLD-CLASS INTEGRITY</p>
+        <p class="text-gray-300 text-[10px] font-black uppercase tracking-widest">&copy; <span id="year"></span> | Albany to the World.</p>
+    </footer>
+
+    <script>
+        let slideInterval;
+
+        function showTab(tabId, btn) {
+            // Clear all active states
+            document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            
+            // Set new active state
+            const target = document.getElementById(tabId);
+            if(target) {
+                target.classList.add('active');
+                btn.classList.add('active');
+            }
+
+            // Reset Shuffler if tab is Credentials
+            clearInterval(slideInterval);
+            if (tabId === 'vouched') {
+                startShuffler();
+            }
+        }
+
+        function startShuffler() {
+            const items = document.querySelectorAll('.shuffler-item');
+            let index = 0;
+            if (items.length === 0) return;
+            
+            // Reset to first slide
+            items.forEach(i => i.classList.remove('active'));
+            items[0].classList.add('active');
+            
+            slideInterval = setInterval(() => {
+                items[index].classList.remove('active');
+                index = (index + 1) % items.length;
+                items[index].classList.add('active');
+            }, 3000);
+        }
+
+        // Set the year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
