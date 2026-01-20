@@ -6,7 +6,6 @@
     <title>ricobs | Data Integrity & Strategic Growth</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦅</text></svg>">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -18,57 +17,42 @@
             --midnight: #1A1C19;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--desert-sand); 
-            color: var(--midnight); 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--desert-sand); color: var(--midnight); overflow-x: hidden; scroll-behavior: smooth; }
         
         /* Navigation */
         .tab-button { @apply px-6 py-2 text-sm font-bold transition-all cursor-pointer rounded-full border border-gray-300; color: var(--cactus-green); outline: none; }
         .tab-button.active { background-color: var(--cactus-green); color: white; border-color: var(--cactus-green); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
         
-        /* Tab Transitions */
         .tab-content { display: none; background: #FFFFFF; @apply p-8 sm:p-16 rounded-[3rem] shadow-xl border border-gray-200/50; animation: slideUp 0.4s ease-out; }
         .tab-content.active { display: block !important; }
         
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Interactive Gallery */
+        /* Credentials Shuffler */
         .showcase-grid { @apply grid lg:grid-cols-2 gap-8; }
-        .shuffler-container { 
-            position: relative; 
-            width: 100%; 
-            height: 520px; 
-            @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center border-8 border-white shadow-2xl transition-transform hover:scale-[1.01]; 
-        }
+        .shuffler-container { position: relative; width: 100%; height: 520px; @apply rounded-3xl bg-neutral-900 overflow-hidden flex flex-col items-center justify-center border-8 border-white shadow-2xl transition-transform hover:scale-[1.01]; }
         .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease-in-out; @apply flex flex-col items-center justify-center p-6 cursor-zoom-in; visibility: hidden; }
         .shuffler-item.active { opacity: 1; visibility: visible; }
         .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg shadow-2xl; }
 
-        /* Progress Bars */
         .progress-bar-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
         .progress-filler { height: 100%; background: var(--terracotta); width: 0%; transition: width 4000ms linear; }
         .shuffler-container:hover .progress-filler, .shuffler-container.paused .progress-filler { transition: none !important; width: 0% !important; }
         .active .progress-filler { width: 100%; }
 
-        /* Controls */
         .slide-counter { position: absolute; top: 20px; right: 20px; @apply bg-white/10 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-white/20 z-10; }
         .hard-pause-btn { position: absolute; bottom: 20px; right: 20px; @apply z-20 bg-white/10 hover:bg-white/30 backdrop-blur-md text-white px-4 py-2 rounded-xl border border-white/20 text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer flex items-center gap-2; }
         .shuffler-container.paused .hard-pause-btn { @apply bg-orange-600 border-orange-400; }
-
-        /* Fullscreen Lightbox */
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; @apply flex flex-col items-center justify-center p-4; animation: fadeIn 0.3s ease; }
-        #lightbox img { @apply max-w-[90%] max-h-[80%] rounded-xl shadow-2xl object-contain border-4 border-white/10; }
-        .lightbox-btn { @apply bg-white text-black font-black px-6 py-3 rounded-xl uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition-all; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Timeline Styles */
         .timeline-item { @apply relative pl-12 border-l-2 border-gray-200 pb-12 last:pb-0; }
         .timeline-dot { @apply absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-orange-600 ring-8 ring-white; }
         .badge { @apply inline-block text-[10px] font-black px-3 py-1 rounded-md mb-2 uppercase tracking-widest; }
+
+        /* Fullscreen Lightbox */
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; @apply flex flex-col items-center justify-center p-4; animation: fadeIn 0.3s ease; }
+        #lightbox img { @apply max-w-[90%] max-h-[80%] rounded-xl shadow-2xl object-contain border-4 border-white/10; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="p-4 sm:p-10 lg:p-20 max-w-6xl mx-auto">
@@ -98,38 +82,54 @@
             <div class="grid lg:grid-cols-2 gap-16 items-start">
                 <div>
                     <h2 class="text-4xl font-black mb-8 leading-tight italic" style="color: var(--cactus-green);">The Eagle & The Cactus.</h2>
-                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                        In my current role as <strong>Database Administrator for Gainwell Technologies</strong>, I maintain the technical integrity required to protect <strong>$9M+ in monthly financial recoveries</strong> for New York State.
-                    </p>
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        My philosophy balances high-level strategic "Eagle" vision with the "Cactus" resilience needed to thrive in demanding, legacy data environments. I ensure data isn't just stored—it's secured and actionable.
-                    </p>
-                </div>
-                <div class="bg-stone-50 p-10 rounded-[2rem] border border-stone-200">
-                    <div class="grid grid-cols-2 gap-8 text-center">
-                        <div><p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Monthly Revenue Protection</p></div>
-                        <div><p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Early Startup Team</p></div>
+                    <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
+                        <p>Currently acting as the <strong>Database Administrator for Gainwell Technologies</strong>, I hold the line on technical integrity to protect <strong>$9M+ in monthly financial recoveries</strong> for the State of New York.</p>
+                        
+                        <p>My philosophy is built on three strategic pillars:</p>
+                        <ul class="space-y-4">
+                            <li><strong class="text-black">01. Precision Custodianship:</strong> High-stakes data requires an eagle’s eye. I ensure every record is immutable and verified before it enters the stream.</li>
+                            <li><strong class="text-black">02. Revenue Continuity:</strong> Systems must be as resilient as a cactus. I build and maintain database lifecycles that survive high-pressure environments without revenue loss.</li>
+                            <li><strong class="text-black">03. Scalable Logic:</strong> Beyond storage, I optimize data for action, ensuring that information is a catalyst for growth rather than a bottleneck.</li>
+                        </ul>
                     </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-stone-50 p-10 rounded-[2rem] border border-stone-200">
+                        <div class="grid grid-cols-2 gap-8 text-center">
+                            <div><p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Monthly Oversight</p></div>
+                            <div><p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Early Startup Hire</p></div>
+                        </div>
+                    </div>
+                    <blockquote class="border-l-4 border-orange-600 pl-6 italic text-gray-500 text-xl">
+                        "Data is the foundation of institutional trust. I don't just store it—I safeguard its integrity."
+                    </blockquote>
                 </div>
             </div>
         </section>
 
         <section id="journey" class="tab-content">
             <h2 class="text-4xl font-black mb-12 uppercase tracking-tighter" style="color: var(--cactus-green);">Professional Impact</h2>
-            <div class="max-w-4xl">
+            <div class="max-w-4xl mx-auto">
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--cactus-green);"></div>
                     <span class="badge" style="background:#DBEAFE; color:#1E40AF">Current</span>
                     <h3 class="text-2xl font-black">Database Administrator | Gainwell</h3>
                     <p class="text-sm font-bold text-orange-600 uppercase mb-3">2025 – Present</p>
-                    <p class="text-gray-600">Managing mission-critical database lifecycles for state Medicaid financial recovery systems.</p>
+                    <p class="text-gray-600">Managing mission-critical database lifecycles for state Medicaid financial recovery systems. Ensuring zero-data loss across complex state infrastructure pipelines.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--terracotta);"></div>
-                    <span class="badge" style="background:#F3F4F6; color:#374151">QA Logistics</span>
+                    <span class="badge" style="background:#F3F4F6; color:#374151">Global Operations</span>
                     <h3 class="text-2xl font-black">QA Analyst | Ritchie Bros.</h3>
                     <p class="text-sm font-bold text-gray-400 uppercase mb-3">2024 – 2025</p>
-                    <p class="text-gray-600">Synchronized logic for global industrial asset auctions and high-volume data verification.</p>
+                    <p class="text-gray-600">Synchronized logic for global industrial asset auctions. High-volume data verification and cross-market logic synchronization.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background-color: #CBD5E1;"></div>
+                    <span class="badge" style="background:#FEF3C7; color:#92400E">Software</span>
+                    <h3 class="text-2xl font-black">Apprentice | Tech Elevator</h3>
+                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">2023</p>
+                    <p class="text-gray-600">Immersive training in full-stack Java development, SQL database design, and enterprise-grade software development principles.</p>
                 </div>
             </div>
         </section>
@@ -147,7 +147,6 @@
                         <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference4.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                     </div>
                 </div>
-
                 <div class="space-y-4">
                     <h4 class="text-[10px] font-black uppercase text-center text-gray-400 tracking-widest">Professional References</h4>
                     <div class="shuffler-container" id="reco-shuffler">
@@ -168,19 +167,15 @@
                 <h2 class="text-white text-5xl font-black mb-8 leading-tight">Growth with Integrity.</h2>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
                     <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🦅 Strategy Call</a>
-                    <a href="mailto:rodricobs@gmail.com" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🌵 Direct Email</a>
+                    <button onclick="showContactInfo()" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🌵 Contact Rico</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <div id="lightbox">
-        <div id="lightbox-close" onclick="closeLightbox()" class="absolute top-10 right-10 text-white text-5xl cursor-pointer hover:text-orange-600">&times;</div>
+    <div id="lightbox" onclick="closeLightbox()">
+        <div id="lightbox-close" class="absolute top-10 right-10 text-white text-5xl cursor-pointer hover:text-orange-600">&times;</div>
         <img id="lightbox-img" src="">
-        <div class="mt-8 flex gap-4">
-            <a id="lightbox-download" href="" download class="lightbox-btn">Download Copy</a>
-            <button onclick="closeLightbox()" class="lightbox-btn" style="background: rgba(255,255,255,0.1); color: white;">Close View</button>
-        </div>
     </div>
 
     <footer class="mt-20 text-center text-gray-400 text-[10px] uppercase tracking-widest">
@@ -188,35 +183,28 @@
     </footer>
 
     <script>
-        // Slideshow State Management
         let slideStates = {
             'cert-shuffler': { interval: null, index: 0, isPaused: false },
             'reco-shuffler': { interval: null, index: 0, isPaused: false }
         };
 
-        // Navigation Control
         function showTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
-            
-            // Manage timing intervals
             Object.keys(slideStates).forEach(id => clearInterval(slideStates[id].interval));
             if (tabId === 'vouched') {
                 setTimeout(() => { startInterval('cert-shuffler'); startInterval('reco-shuffler'); }, 100);
             }
         }
 
-        // Logic for rotating credentials
         function startInterval(id) {
             const container = document.getElementById(id);
             const items = container.querySelectorAll('.shuffler-item');
             const counter = container.querySelector('.slide-counter span');
-            
             slideStates[id].interval = setInterval(() => {
-                // Only cycle if not hard-paused, not hovered, and lightbox is closed
-                if (!slideStates[id].isPaused && !container.matches(':hover') && document.getElementById('lightbox').style.display !== 'flex') {
+                if (!slideStates[id].isPaused && !container.matches(':hover')) {
                     items[slideStates[id].index].classList.remove('active');
                     slideStates[id].index = (slideStates[id].index + 1) % items.length;
                     items[slideStates[id].index].classList.add('active');
@@ -225,7 +213,6 @@
             }, 4000);
         }
 
-        // Hard Pause Toggle
         function togglePause(id, btn, event) {
             event.stopPropagation();
             slideStates[id].isPaused = !slideStates[id].isPaused;
@@ -234,11 +221,8 @@
             btn.querySelector('.btn-text').innerText = slideStates[id].isPaused ? 'Resume' : 'Pause';
         }
 
-        // Lightbox Functions
         function openLightbox(el) {
-            const src = el.querySelector('img').src;
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox-download').href = src;
+            document.getElementById('lightbox-img').src = el.querySelector('img').src;
             document.getElementById('lightbox').style.display = 'flex';
         }
 
@@ -246,7 +230,10 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // Set current year
+        function showContactInfo() {
+            alert("RICOBS BUSINESS INQUIRIES:\n\nPlease email rodricobs@gmail.com with all business solution needs or strategic partnership opportunities.\n\nDirect communication is monitored 24/7.");
+        }
+
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
