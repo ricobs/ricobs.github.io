@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* Tab Navigation - Local Business Feel */
+        /* Tab Navigation */
         .tab-button {
             @apply px-4 py-2 text-lg font-medium transition-all duration-300;
             color: #92400E;
@@ -125,7 +125,7 @@
 
         @media print {
             .no-print { display: none; }
-            .tab-content { display: block !important; border: none; shadow: none; }
+            .tab-content { display: block !important; border: none; box-shadow: none; }
         }
     </style>
 </head>
@@ -136,14 +136,14 @@
             <span class="text-4xl">🦅</span>
             <h1 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter">ricobs.github.io</h1>
         </div>
-        <p class="text-amber-700 font-bold tracking-[0.2em] mt-2 text-sm sm:text-base">PRECISION FROM A BIRD'S EYE VIEW</p>
+        <p class="text-amber-700 font-bold tracking-[0.2em] mt-2 text-sm sm:text-base uppercase">Precision from a bird's eye view</p>
     </header>
 
     <nav class="mb-8 no-print overflow-x-auto">
         <ul class="flex justify-center space-x-2 sm:space-x-6 min-w-max pb-2">
             <li><a class="tab-button active" href="#" data-tab-target="about-content">About</a></li>
             <li><a class="tab-button" href="#" data-tab-target="services-content">Services</a></li>
-            <li><a class="tab-button" href="#" data-tab-target="resume-content">Experience</a></li>
+            <li><a class="tab-button" href="#" data-tab-target="resume-content">Work Experience</a></li>
             <li><a class="tab-button" href="#" data-tab-target="references-content">References</a></li>
             <li><a class="tab-button" href="#" data-tab-target="certifications-content">Education</a></li>
             <li><a class="tab-button" href="#" data-tab-target="contact-tab-content">Contact</a></li>
@@ -163,7 +163,7 @@
                         With a specialized focus on **New York State Medicaid systems**, we manage high-volume databases that ensure millions in monthly recoveries and total regulatory compliance.
                     </p>
                     <p>
-                        Our approach is built on the "Golden" standard: local reliability with enterprise-grade analytic power. Whether it’s reducing manual labor by thousands of hours through SQL automation or meeting strict 48-hour turnarounds for OMIG, we deliver precision at scale.
+                        Our approach is built on the "Golden" standard: local reliability with enterprise-grade analytic power. Whether it’s reducing manual labor through SQL automation or meeting strict 48-hour turnarounds for OMIG, we deliver precision at scale.
                     </p>
                 </div>
             </div>
@@ -194,7 +194,7 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-amber-900 mb-2 underline decoration-amber-500">Frameworks</h3>
-                        <p class="text-gray-700">Scikit Learn, Matplotlib, Agile Scrum, Project Management</p>
+                        <p class="text-gray-700">Scikit Learn, Matplotlib, Jupyter Notebook, GitHub, Agile Scrum, Asana</p>
                     </div>
                     <div>
                         <h3 class="font-bold text-amber-900 mb-2 underline decoration-amber-500">Expertise</h3>
@@ -214,11 +214,11 @@
                     <p class="text-lg text-amber-700 font-semibold">Gainwell Technologies (NY State Medicaid)</p>
                     <p class="text-sm text-gray-400 italic mb-4">July 2025 - Present | Latham, NY</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li>Helping recover **$9 million monthly** for the New York Medicaid system through database oversight.</li>
-                        <li>Maintaining Payment, Estates, and Casualty Liens databases for full regulatory compliance.</li>
+                        <li>Facilitating the recovery of **$9 million monthly** for the New York Medicaid system through database oversight.</li>
+                        <li>Maintaining Payment, Estates, and Casualty Liens databases ensuring full regulatory compliance and integrity.</li>
                         <li>Managing **SCA 2-day return requests** for OMIG New York Medicaid systems.</li>
-                        <li>Ensuring full payment of liens are repaid in most accurate and timely changes.</li>
-                        <li>Promoting efficiency through database optimization and overpayment reconciliation.</li>
+                        <li>Overseeing refund and overpayment databases, promoting efficiency in ensuring full payment of liens and overpays.</li>
+                        <li>Optimizing database performance to ensure accurate and timely financial reporting.</li>
                     </ul>
                 </article>
 
@@ -227,7 +227,7 @@
                     <p class="text-lg text-amber-700 font-semibold">Ritchie Bros. Global</p>
                     <p class="text-sm text-gray-400 italic mb-4">Jan 2025 - July 2025 | Latham, NY</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-1">
-                        <li>Processed salvage titles nationwide, applying state-specific laws for full compliance.</li>
+                        <li>Processed salvage titles nationwide, applying state-specific laws for full regulatory compliance.</li>
                         <li>Resolved title discrepancies via analytical problem-solving to ensure swift vehicle sales.</li>
                     </ul>
                 </article>
@@ -237,8 +237,18 @@
                     <p class="text-lg text-amber-700 font-semibold">Tech Elevator</p>
                     <p class="text-sm text-gray-400 italic mb-4">2023 - Nov 2024</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-1">
-                        <li>Designed historical sales databases, improving sales target accuracy by 32%.</li>
-                        <li>Reduced manual labor by 25,000 hours annually via SQL-based automation.</li>
+                        <li>Designed historical sales databases, enabling custom reporting and improving sales target accuracy by 32%.</li>
+                        <li>Designed data governance policies and implemented Master Data Management.</li>
+                    </ul>
+                </article>
+
+                <article class="p-6 bg-white border-l-8 border-amber-300 shadow-md rounded-r-xl opacity-70">
+                    <h3 class="text-2xl font-bold text-amber-900">Business Analyst</h3>
+                    <p class="text-lg text-amber-700 font-semibold">Tech Elevator</p>
+                    <p class="text-sm text-gray-400 italic mb-4">May 2022 - 2023</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Implemented SQL-based automation, reducing manual labor by 25,000 hours annually.</li>
+                        <li>Improved data accuracy from 60% to 98% through standardized auditing processes.</li>
                     </ul>
                 </article>
             </section>
@@ -260,6 +270,9 @@
                     <div class="shuffler-item-ref">
                         <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference7.png?raw=true" alt="Reference 4">
                     </div>
+                    <div class="shuffler-item-ref">
+                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference8.png?raw=true" alt="Reference 5">
+                    </div>
                 </div>
             </div>
             <p class="mt-6 text-center text-amber-900 italic font-medium">Professional references available upon request.</p>
@@ -274,9 +287,12 @@
                 <div class="shuffler-item-ref">
                     <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference1.png?raw=true" alt="Cert 2">
                 </div>
+                <div class="shuffler-item-ref">
+                    <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference4.png?raw=true" alt="Cert 3">
+                </div>
             </div>
             <ul class="list-disc list-inside text-lg text-amber-900 space-y-2 font-semibold">
-                <li>Data Science & Machine Learning Graduate - BloomTech</li>
+                <li>Data Science & Machine Learning Graduate - BloomTech (2022)</li>
                 <li>Hubspot Reporting Certified</li>
                 <li>Camtasia Explorer Certified</li>
             </ul>
@@ -299,6 +315,9 @@
                             Send an Email
                         </a>
                     </div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-amber-200">
+                    <p class="text-sm font-bold text-amber-900 uppercase">Latham, New York | Remote Solutions Worldwide</p>
                 </div>
             </div>
         </div>
