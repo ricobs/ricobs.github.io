@@ -11,31 +11,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #FDF8E4; color: #2d241e; }
+        body { font-family: 'Inter', sans-serif; background-color: #FDF8E4; color: #2d241e; overflow-x: hidden; }
         header h1 { background: linear-gradient(to right, #92400E, #D97706, #92400E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Navigation Styling */
-        .tab-button { @apply px-5 py-2 text-sm font-bold transition-all cursor-pointer rounded-lg; color: #78350f; }
-        .tab-button.active { @apply bg-amber-600 text-white shadow-md; }
+        /* Navigation */
+        .tab-button { @apply px-5 py-2 text-sm font-bold transition-all cursor-pointer rounded-lg border-2 border-transparent; color: #78350f; background: none; }
+        .tab-button.active { @apply bg-amber-600 text-white shadow-md border-amber-700; }
         
-        /* Content Section Styling */
-        .tab-content { background: #FFFFFF; @apply p-8 sm:p-12 rounded-3xl shadow-xl border border-amber-100 hidden; animation: fadeIn 0.4s ease-out; }
-        .tab-content.active { display: block; }
+        /* Content Sections */
+        .tab-content { background: #FFFFFF; @apply p-8 sm:p-12 rounded-3xl shadow-xl border border-amber-100 hidden; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block !important; }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Component Styling */
+        /* Elements */
         .impact-card { @apply bg-white p-6 rounded-2xl flex-1 text-center border-2 border-amber-100 shadow-sm transition-all hover:shadow-lg hover:border-amber-400; }
-        .code-window { background: #1a1510; @apply p-6 rounded-2xl font-mono text-amber-300 text-sm border-l-8 border-amber-600 shadow-inner my-6; }
+        .code-window { background: #1a1510; @apply p-6 rounded-2xl font-mono text-amber-300 text-sm border-l-8 border-amber-600 shadow-inner my-6 overflow-x-auto; }
         
         .timeline-box { @apply relative pl-8 border-l-2 border-amber-200 mb-10; }
         .timeline-marker { @apply absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-amber-600; }
 
-        /* Shuffler Styling for References */
-        .shuffler-container { position: relative; width: 100%; min-height: 450px; @apply rounded-2xl bg-amber-50/50 overflow-hidden; }
-        .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; @apply flex items-center justify-center p-6; }
+        /* Image Shuffler */
+        .shuffler-container { position: relative; width: 100%; min-height: 450px; @apply rounded-2xl bg-amber-50/50 overflow-hidden flex items-center justify-center; }
+        .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease; @apply flex items-center justify-center p-6; z-index: 1; }
         .shuffler-item.active { opacity: 1; z-index: 10; }
-        .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg shadow-sm; }
+        .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg shadow-md bg-white; }
     </style>
 </head>
 <body class="p-4 sm:p-8 lg:p-12 max-w-5xl mx-auto">
@@ -45,30 +45,31 @@
             <img src="ricobsdatabase.jpg" alt="ricobs logo" class="h-36 w-36 object-contain mb-4 rounded-full border-4 border-amber-500 shadow-lg bg-white">
             <h1 class="text-5xl sm:text-6xl font-black tracking-tight mb-2">RICOBS</h1>
             <div class="flex items-center gap-3 justify-center mb-2">
-                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200 uppercase">Remote & Global Strategy</span>
+                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200 uppercase tracking-widest">Remote & Global Strategy</span>
             </div>
             <p class="text-amber-800 font-bold tracking-widest text-xs sm:text-sm uppercase italic decoration-amber-500 underline decoration-2">Honest Work. World-Class Data.</p>
         </div>
     </header>
 
-    <nav class="flex justify-center flex-wrap gap-4 mb-10 no-print">
-        <button class="tab-button active" data-tab-target="the-vision">The Vision</button>
-        <button class="tab-button" data-tab-target="the-journey">The Journey</button>
-        <button class="tab-button" data-tab-target="the-tools">The Tools</button>
-        <button class="tab-button" data-tab-target="vouched">Vouched</button>
-        <button class="tab-button" data-tab-target="connect">Connect</button>
+    <nav class="flex justify-center flex-wrap gap-4 mb-10">
+        <button class="tab-button active" onclick="showTab('the-vision', this)">The Vision</button>
+        <button class="tab-button" onclick="showTab('the-journey', this)">The Journey</button>
+        <button class="tab-button" onclick="showTab('the-tools', this)">The Tools</button>
+        <button class="tab-button" onclick="showTab('vouched', this)">Vouched</button>
+        <button class="tab-button" onclick="showTab('connect', this)">Connect</button>
     </nav>
 
     <div id="main-portal">
-        <div id="the-vision" class="tab-content active">
+        
+        <section id="the-vision" class="tab-content active">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="text-4xl font-black text-amber-900 mb-6">Built to Serve, Anywhere.</h2>
                     <p class="text-xl text-amber-950 leading-relaxed mb-6">
-                        I look at data as more than just rows in a table. It's the lifeblood of a business. I treat every project with the personal care of a local shop, backed by the experience of a global enterprise.
+                        I look at data as the lifeblood of a business. I treat every project with the personal care of a local shop, backed by the experience of a global enterprise.
                     </p>
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-                        Currently, I help manage the recovery of **$9 million every month** for New York State. While my roots are in the Capital Region, my solutions are designed to scale for teams across the globe.
+                        Currently managing **$9M+ monthly** in revenue recovery. I'm based in NY, but my solutions are built for remote-first collaboration worldwide.
                     </p>
                 </div>
                 <div class="grid grid-cols-1 gap-6">
@@ -82,50 +83,50 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="the-journey" class="tab-content">
+        <section id="the-journey" class="tab-content">
             <h2 class="text-3xl font-black text-amber-900 mb-10 text-center">The Track Record</h2>
             <div class="max-w-3xl mx-auto">
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
                     <h3 class="text-xl font-black text-amber-900">Database Administrator | Gainwell Technologies</h3>
-                    <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2025 - Present</p>
-                    <p class="text-gray-700 leading-relaxed">Securing revenue lifecycles for the NY State Medicaid system. High-volume, mission-critical work where accuracy is the only option.</p>
+                    <p class="text-xs font-bold text-amber-600 uppercase mb-3 italic">2025 - Present</p>
+                    <p class="text-gray-700 leading-relaxed">Securing revenue lifecycles for NY State Medicaid. Mission-critical accuracy at scale.</p>
                 </div>
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
-                    <h3 class="text-xl font-black text-amber-900">Quality Assurance Analyst | Ritchie Bros. Global</h3>
-                    <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2024 - 2025</p>
-                    <p class="text-gray-700 leading-relaxed">Navigated nationwide title logic and asset integrity. I ensured global liquidations were supported by rock-solid data governance.</p>
+                    <h3 class="text-xl font-black text-amber-900">QA Analyst | Ritchie Bros. Global</h3>
+                    <p class="text-xs font-bold text-amber-600 uppercase mb-3 italic">2024 - 2025</p>
+                    <p class="text-gray-700 leading-relaxed">Managing global asset integrity and nationwide title logic.</p>
                 </div>
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
                     <h3 class="text-xl font-black text-amber-900">Enterprise Data Analyst | Tech Elevator</h3>
-                    <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2022 - 2024</p>
-                    <p class="text-gray-700 leading-relaxed">My foundational first role in automation. I developed the SQL and Python pipelines that eliminated massive manual bottlenecks.</p>
+                    <p class="text-xs font-bold text-amber-600 uppercase mb-3 italic">2022 - 2024</p>
+                    <p class="text-gray-700 leading-relaxed">Bridging complex SQL databases with automated Python workflows.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="the-tools" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase tracking-tight">Technical Arsenal</h2>
+        <section id="the-tools" class="tab-content">
+            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase">Technical Arsenal</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
                     <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Enterprise SQL</h3>
-                    <p class="text-sm text-gray-600 mb-4">Finding the revenue leakage others miss through precise query architecture.</p>
-                    <div class="code-window">SELECT lien_id FROM revenue_audit WHERE status = 'active';</div>
+                    <p class="text-sm text-gray-600 mb-4">Precision auditing and query optimization.</p>
+                    <div class="code-window">SELECT lien_id FROM revenue_audit WHERE status='active';</div>
                 </div>
                 <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
                     <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Python Automation</h3>
-                    <p class="text-sm text-gray-600 mb-4">Building bridge logic that handles thousands of requests in seconds.</p>
+                    <p class="text-sm text-gray-600 mb-4">Turning hours of manual work into seconds of code.</p>
                     <div class="code-window">matches = pd.merge(state_req, db_master, on='uid')</div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="vouched" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase tracking-tight">Vouched</h2>
+        <section id="vouched" class="tab-content">
+            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase">Vouched</h2>
             <div class="shuffler-container">
                 <div class="shuffler-item active"><img src="reference1.png" alt="Reference 1"></div>
                 <div class="shuffler-item"><img src="reference2.png" alt="Reference 2"></div>
@@ -136,57 +137,69 @@
                 <div class="shuffler-item"><img src="reference7.png" alt="Reference 7"></div>
                 <div class="shuffler-item"><img src="reference8.png" alt="Reference 8"></div>
             </div>
-        </div>
+        </section>
 
-        <div id="connect" class="tab-content">
+        <section id="connect" class="tab-content">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl font-black text-amber-900 mb-6">Let's Solve Your Data Headaches</h2>
+                <h2 class="text-4xl font-black text-amber-900 mb-6">Let's Talk Strategy</h2>
                 <div class="bg-amber-900 p-12 rounded-[2.5rem] shadow-2xl">
                     <p class="text-amber-100 text-xl mb-10 font-medium">
-                        Based in NY, serving the world. I'm fully set up for remote partnership and ready to help you secure your revenue through better data.
+                        Fully set up for remote partnership. Let's secure your revenue through better data.
                     </p>
                     <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                        <a href="https://calendly.com/rodricobs" target="_blank" class="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-amber-950 font-black py-5 px-10 rounded-2xl transition-all transform hover:scale-105 shadow-xl uppercase">🦅 Book Flight Path</a>
-                        <a href="mailto:rodricobs@gmail.com" class="w-full md:w-auto border-2 border-amber-500 text-amber-100 py-5 px-10 rounded-2xl font-bold hover:bg-amber-800 transition-all uppercase">Say Hello</a>
+                        <a href="https://calendly.com/rodricobs" target="_blank" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-black py-5 px-10 rounded-2xl transition-all shadow-xl uppercase">🦅 Book Call</a>
+                        <a href="mailto:rodricobs@gmail.com" class="border-2 border-amber-500 text-amber-100 py-5 px-10 rounded-2xl font-bold hover:bg-amber-800 transition-all uppercase">Say Hello</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
     </div>
 
     <footer class="text-center mt-16 py-8 border-t border-amber-200">
         <p class="text-amber-800 font-bold text-xs uppercase tracking-widest italic decoration-amber-400 underline decoration-2">ricobs.github.io | Albany to the World</p>
-        <p class="text-amber-600 text-[10px] mt-2">&copy; <span id="year"></span> | Proven Results across every border.</p>
+        <p class="text-amber-600 text-[10px] mt-2">&copy; <span id="year"></span> | Proven Results.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const btns = document.querySelectorAll('.tab-button');
+        let slideInterval;
+
+        function showTab(tabId, btn) {
+            // 1. Hide all sections
             const sections = document.querySelectorAll('.tab-content');
-            let slideInterval;
+            sections.forEach(s => s.classList.remove('active'));
 
-            function showSection(id) {
-                btns.forEach(b => b.classList.toggle('active', b.dataset.tabTarget === id));
-                sections.forEach(s => s.classList.toggle('active', s.id === id));
-                
-                // Clear and restart shuffler only when "Vouched" tab is active
-                clearInterval(slideInterval);
-                if (id === 'vouched') startShuffler();
+            // 2. Remove active class from all buttons
+            const btns = document.querySelectorAll('.tab-button');
+            btns.forEach(b => b.classList.remove('active'));
+
+            // 3. Show target section and active button
+            const target = document.getElementById(tabId);
+            if(target) {
+                target.classList.add('active');
+                btn.classList.add('active');
             }
 
-            function startShuffler() {
-                const slides = document.querySelectorAll('.shuffler-item');
-                let cur = 0;
-                slideInterval = setInterval(() => {
-                    slides[cur].classList.remove('active');
-                    cur = (cur + 1) % slides.length;
-                    slides[cur].classList.add('active');
-                }, 3000);
+            // 4. Handle Shuffler
+            clearInterval(slideInterval);
+            if (tabId === 'vouched') {
+                startShuffler();
             }
+        }
 
-            btns.forEach(btn => btn.addEventListener('click', () => showSection(btn.dataset.tabTarget)));
-            document.getElementById('year').textContent = new Date().getFullYear();
-        });
+        function startShuffler() {
+            const items = document.querySelectorAll('.shuffler-item');
+            let cur = 0;
+            if(items.length === 0) return;
+            
+            slideInterval = setInterval(() => {
+                items[cur].classList.remove('active');
+                cur = (cur + 1) % items.length;
+                items[cur].classList.add('active');
+            }, 3000);
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
