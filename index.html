@@ -11,14 +11,27 @@
         body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; background-color: #FDF8E4; color: #1F2937; }
         header h1 { background: linear-gradient(to right, #B45309, #D97706, #B45309); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .eagle-border { border-bottom: 3px solid #D97706; position: relative; }
-        .tab-button { @apply px-4 py-2 text-lg font-medium transition-all duration-300; color: #92400E; border-bottom: 3px solid transparent; }
+        
+        /* Navigation Tabs */
+        .tab-button { @apply px-4 py-2 text-lg font-medium transition-all duration-300 cursor-pointer; color: #92400E; border-bottom: 3px solid transparent; }
         .tab-button.active { color: #B45309; border-bottom-color: #D97706; background: rgba(251, 191, 36, 0.05); font-weight: 700; }
+        
         .tab-content { background-color: #FFFFFF; @apply p-6 sm:p-10 rounded-xl shadow-2xl border border-amber-100; display: none; animation: fadeIn 0.4s ease-out; }
         .tab-content.active { display: block; }
+        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Data & Project Elements */
         .metric-box { background: #451a03; @apply text-white p-4 rounded-lg flex-1 min-w-[140px] text-center border-b-4 border-amber-500 shadow-lg; }
         .code-block { background: #2D1A0A; color: #FCD34D; @apply p-4 rounded-lg font-mono text-sm overflow-x-auto my-4 border-l-4 border-amber-500; }
-        .project-card { @apply border border-amber-100 rounded-xl p-6 mb-8 bg-amber-50/30; }
+        .project-card { @apply border border-amber-100 rounded-xl p-6 mb-8 bg-amber-50/30 transition-all hover:bg-amber-50/60; }
+        
+        /* Shuffler */
+        .image-shuffler { position: relative; width: 100%; min-height: 400px; overflow: hidden; @apply rounded-lg bg-amber-50; }
+        .shuffler-item-ref { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; justify-content: center; align-items: center; }
+        .shuffler-item-ref.active { opacity: 1; z-index: 1; }
+        .shuffler-item-ref img { max-width: 95%; max-height: 95%; object-fit: contain; }
+
         @media print { .no-print { display: none; } .tab-content { display: block !important; border: none; box-shadow: none; } }
     </style>
 </head>
@@ -26,8 +39,8 @@
 
     <header class="text-center mb-10 pb-6 border-b-4 border-double border-amber-600">
         <div class="flex flex-col items-center justify-center gap-2">
-            <img src="ricobsdatabase.jpg" alt="ricobs logo" class="h-24 w-24 object-contain mb-2 rounded-full border-2 border-amber-500 shadow-md" onerror="this.style.display='none'; document.getElementById('emoji-logo').style.display='block';">
-            <span id="emoji-logo" class="text-5xl hidden">🦅</span>
+            <img src="ricobsdatabase.jpg" alt="ricobs logo" class="h-32 w-32 object-contain mb-2 rounded-full border-2 border-amber-500 shadow-lg bg-white" onerror="this.style.display='none'; document.getElementById('emoji-logo').style.display='block';">
+            <span id="emoji-logo" class="text-6xl hidden">🦅</span>
             <h1 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter">ricobs.github.io</h1>
         </div>
         <p class="text-amber-700 font-bold tracking-[0.2em] mt-2 text-sm sm:text-base uppercase italic">Precision Revenue & Data Integrity</p>
@@ -35,10 +48,11 @@
 
     <nav class="mb-8 no-print overflow-x-auto">
         <ul class="flex justify-center space-x-2 sm:space-x-6 min-w-max pb-2">
-            <li><a class="tab-button active" href="#" data-tab-target="about-content">The Vision</a></li>
-            <li><a class="tab-button" href="#" data-tab-target="resume-content">Track Record</a></li>
-            <li><a class="tab-button" href="#" data-tab-target="projects-content">Flight Logs (Gallery)</a></li>
-            <li><a class="tab-button" href="#" data-tab-target="contact-tab-content">Contact</a></li>
+            <li><a class="tab-button active" data-tab-target="about-content">The Vision</a></li>
+            <li><a class="tab-button" data-tab-target="resume-content">Track Record</a></li>
+            <li><a class="tab-button" data-tab-target="projects-content">Flight Logs</a></li>
+            <li><a class="tab-button" data-tab-target="references-content">Vouched</a></li>
+            <li><a class="tab-button" data-tab-target="contact-tab-content">Contact</a></li>
         </ul>
     </nav>
 
@@ -46,71 +60,98 @@
         <div id="about-content" class="tab-content active">
             <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Strategic Oversight</h2>
             <div class="text-lg text-yellow-900 space-y-6">
-                <p class="font-bold text-2xl text-amber-800">Bridging the gap between state-level architecture and fiscal recovery.</p>
-                <p>Specializing in the identification and recovery of multi-million dollar monthly leakages within NYS Medicaid systems. We treat database integrity as a local business—built on trust, accountability, and the "Bird's Eye View" of every record.</p>
+                <p class="font-bold text-2xl text-amber-800">Bridging the gap between high-altitude state architecture and ground-level fiscal recovery.</p>
+                <p>Inspired by the resilience of the golden eagle on the cactus, my work provides a firm foundation for **New York State Medicaid Enterprise Systems (MES)**. I specialize in the identification and recovery of multi-million dollar monthly leakages through advanced database administration and regulatory reconciliation.</p>
+                <p>My methodology treats data with the accountability of a "local business" while delivering enterprise-scale power. I ensure **OMIG compliance** is met with the speed of custom SQL automation.</p>
             </div>
         </div>
 
         <div id="resume-content" class="tab-content">
-            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Experience</h2>
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Professional Track Record</h2>
+            
             <article class="p-8 bg-white border border-amber-100 shadow-lg rounded-xl mb-8">
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <h3 class="text-2xl font-black text-amber-900 uppercase">Database Administrator</h3>
                         <p class="text-lg text-amber-700 font-bold">Gainwell Technologies | NYS Medicaid</p>
                     </div>
-                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">CURRENT</span>
+                    <span class="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Current</span>
                 </div>
+
                 <div class="flex flex-wrap gap-4 my-6">
-                    <div class="metric-box"><p class="text-[10px] uppercase font-bold opacity-70">Monthly Recovery</p><p class="text-2xl font-black">$9,000,000+</p></div>
-                    <div class="metric-box"><p class="text-[10px] uppercase font-bold opacity-70">SCA Turnaround</p><p class="text-2xl font-black">48 Hours</p></div>
+                    <div class="metric-box">
+                        <p class="text-[10px] uppercase font-bold opacity-70 tracking-widest">Monthly Recovery</p>
+                        <p class="text-2xl font-black">$9,000,000+</p>
+                    </div>
+                    <div class="metric-box">
+                        <p class="text-[10px] uppercase font-bold opacity-70 tracking-widest">SCA Response</p>
+                        <p class="text-2xl font-black">48 Hours</p>
+                    </div>
+                    <div class="metric-box">
+                        <p class="text-[10px] uppercase font-bold opacity-70 tracking-widest">Data Accuracy</p>
+                        <p class="text-2xl font-black">99.9%</p>
+                    </div>
                 </div>
-                <ul class="list-disc list-inside text-gray-700 space-y-2">
-                    <li>Securing multi-million dollar monthly recoveries for NY Medicaid.</li>
-                    <li>Managing SCA 2-day return requests for OMIG audit systems.</li>
+
+                <ul class="list-disc list-inside text-gray-700 space-y-3 text-lg">
+                    <li>Facilitating the recovery of **$9 million monthly** for the New York Medicaid system through precise database oversight.</li>
+                    <li>Maintaining Payment, Estates, and Casualty Liens databases for full regulatory compliance.</li>
+                    <li>Managing **SCA 2-day return requests** for OMIG New York Medicaid systems.</li>
                 </ul>
+            </article>
+
+            <article class="p-6 border-l-4 border-amber-300 bg-amber-50 rounded-r-lg opacity-80">
+                <h3 class="font-bold text-amber-900 text-xl">Enterprise Analyst | Tech Elevator</h3>
+                <p class="text-sm italic text-gray-500 mb-2">2022 - 2024</p>
+                <p class="text-gray-700">Scaled SQL-driven automation to reduce manual labor by **25,000 hours annually** and implemented Data Governance protocols for 98% auditing accuracy.</p>
             </article>
         </div>
 
         <div id="projects-content" class="tab-content">
             <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Flight Logs: Project Gallery</h2>
-            <p class="text-amber-800 italic mb-8">Practical solutions for everyday database troubles and moon-shot optimizations.</p>
-
+            
             <div class="project-card">
-                <h3 class="text-xl font-bold text-amber-900 mb-2">1. Stopping the Leak: Automated Audit Reconciliation</h3>
-                <p class="text-gray-700 mb-4"><strong>The Problem:</strong> Data decay in legacy casualty lien records led to missed recovery windows (leakage over time).</p>
-                <p class="text-gray-700 mb-4"><strong>The Solve:</strong> Implemented a recursive SQL verification script that flags mismatched payment triggers before the recovery window closes.</p>
+                <h3 class="text-xl font-bold text-amber-900 mb-2">1. The Leak: Automated Audit Reconciliation</h3>
+                <p class="text-gray-700 mb-4"><strong>Trouble:</strong> Data decay in legacy records led to missed recovery windows (revenue leaking over time).</p>
+                <p class="text-gray-700 mb-4"><strong>Solve:</strong> Deployed a recursive verification script that flags mismatched triggers before recovery windows expire.</p>
                 <div class="code-block">
-                    -- Example Logic: Identifying stale recovery triggers<br>
-                    SELECT lien_id, recovery_amt, last_active_date<br>
-                    FROM mes_liens_table<br>
-                    WHERE status = 'Pending' AND last_active_date < (CURRENT_DATE - INTERVAL '30 days');
+                    -- Recursive check for stale recovery triggers<br>
+                    SELECT lien_id, recovery_amt FROM mes_liens<br>
+                    WHERE status = 'Pending' AND last_active < (CURRENT_DATE - 30);
                 </div>
-                <p class="text-sm font-bold text-amber-700">RESULT: Reduced monthly revenue leakage by 15% within the first 60 days.</p>
+                <p class="text-sm font-bold text-amber-700 italic">Impact: Recovered 15% more "lost" revenue in 60 days.</p>
             </div>
 
             <div class="project-card">
-                <h3 class="text-xl font-bold text-amber-900 mb-2">2. The Moon Shot: Enterprise ETL Automation</h3>
-                <p class="text-gray-700 mb-4"><strong>The Problem:</strong> Manual reconciliation of OMIG requests was taking 2,000+ man-hours per year.</p>
-                <p class="text-gray-700 mb-4"><strong>The Solve:</strong> Developed a Python-driven pipeline to auto-parse state request files and cross-reference them against the MES database in seconds.</p>
+                <h3 class="text-xl font-bold text-amber-900 mb-2">2. The Moon Shot: Massive ETL Automation</h3>
+                <p class="text-gray-700 mb-4"><strong>Trouble:</strong> High-impact state requests required manual parsing of thousands of records, causing bottlenecks.</p>
+                <p class="text-gray-700 mb-4"><strong>Solve:</strong> Developed a Python-to-SQL pipeline to auto-parse and cross-reference state requests in real-time.</p>
                 <div class="code-block">
-                    # High Impact Solution Logic<br>
-                    import pandas as pd<br>
-                    df_state = pd.read_csv('omig_request.csv')<br>
-                    df_internal = db.query("SELECT * FROM mes_master")<br>
-                    matches = df_state.merge(df_internal, on='medicaid_id')
+                    # Scaling manual work to machine speed<br>
+                    df_state = pd.read_csv('state_request.csv')<br>
+                    matches = df_state.merge(db_master, on='medicaid_id')
                 </div>
-                <p class="text-sm font-bold text-amber-700">RESULT: Saved 25,000+ total labor hours; scaled to 99.9% data accuracy across all state returns.</p>
+                <p class="text-sm font-bold text-amber-700 italic">Impact: Saved 25,000+ man-hours annually.</p>
             </div>
         </div>
 
+        <div id="references-content" class="tab-content">
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Market Endorsements</h2>
+            <div id="references-image-shuffler" class="image-shuffler">
+                <div class="shuffler-item-ref active"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference3.png?raw=true" alt="Ref 1"></div>
+                <div class="shuffler-item-ref"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference5.png?raw=true" alt="Ref 2"></div>
+                <div class="shuffler-item-ref"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference6.png?raw=true" alt="Ref 3"></div>
+            </div>
+            <p class="mt-6 text-center text-amber-900 italic font-medium">Professional references available upon request.</p>
+        </div>
+
         <div id="contact-tab-content" class="tab-content">
-            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-8">Secure a Consultation</h2>
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-8">Secure Your Data Flight Path</h2>
             <div class="bg-amber-900 p-10 rounded-3xl text-center shadow-2xl">
-                <p class="text-amber-100 text-xl mb-8 italic">"Let's align your data infrastructure with your fiscal goals."</p>
+                <p class="text-amber-100 text-xl mb-8 font-light italic">"Precision at scale. Let's align your infrastructure with your fiscal goals."</p>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6">
                     <a href="https://calendly.com/rodricobs" target="_blank" class="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-amber-950 font-black py-5 px-10 rounded-2xl transition-all transform hover:scale-105 shadow-xl text-xl uppercase tracking-tighter">
-                        🦅 Schedule Flight Path
+                        🦅 Book on Calendly
                     </a>
                     <a href="mailto:rodricobs@gmail.com" class="w-full md:w-auto border-2 border-amber-500 text-amber-100 py-5 px-10 rounded-2xl font-bold hover:bg-amber-800 transition-all uppercase tracking-widest text-sm">
                         Direct Email
@@ -128,12 +169,32 @@
         document.addEventListener('DOMContentLoaded', () => {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
+            let interval;
+
+            function showTab(tabId) {
+                tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tabTarget === tabId));
+                tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+                
+                clearInterval(interval);
+                if (tabId === 'references-content') startShuffler();
+            }
+
+            function startShuffler() {
+                const items = document.querySelectorAll('.shuffler-item-ref');
+                if (!items.length) return;
+                let idx = 0;
+                interval = setInterval(() => {
+                    items[idx].classList.remove('active');
+                    idx = (idx + 1) % items.length;
+                    items[idx].classList.add('active');
+                }, 3000);
+            }
+
             tabButtons.forEach(btn => btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const target = btn.dataset.tabTarget;
-                tabButtons.forEach(b => b.classList.toggle('active', b === btn));
-                tabContents.forEach(c => c.classList.toggle('active', c.id === target));
+                showTab(btn.dataset.tabTarget);
             }));
+
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>
