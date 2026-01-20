@@ -3,255 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ricobs.github.io</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>ricobs.github.io | Quality Data Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #FDF8E4;
-            color: #4B5563;
+            background-color: #FDF8E4; /* Masa/Cream Base */
+            color: #374151;
         }
-        ul li { margin-bottom: 0.5rem; }
-        a { text-decoration: none; color: #EF4444; }
-        a:hover { text-decoration: underline; color: #DC2626; }
-        .section-border { border-bottom: 1px solid #FCD34D; }
+
+        /* Golden Eagle Thematic Elements */
+        header h1 {
+            background: linear-gradient(to right, #B45309, #D97706, #B45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .eagle-border {
+            border-bottom: 3px solid #D97706;
+            position: relative;
+        }
+
+        /* Tab Navigation - Local Business Feel */
         .tab-button {
-            @apply px-4 py-2 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors duration-200;
-            background-color: transparent;
-            border-radius: 0;
-            border-bottom: 2px solid transparent;
-            color: #F59E0B;
-            transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            @apply px-4 py-2 text-lg font-medium transition-all duration-300;
+            color: #92400E;
+            border-bottom: 3px solid transparent;
         }
-        .tab-button:hover { color: #D97706; }
-        .tab-button.active {
+        .tab-button:hover {
             color: #D97706;
+            background: rgba(251, 191, 36, 0.1);
+        }
+        .tab-button.active {
+            color: #B45309;
             border-bottom-color: #D97706;
-            font-weight: 600;
+            background: rgba(251, 191, 36, 0.05);
+            font-weight: 700;
         }
+
         .tab-content {
-            background-color: #FFFCEB;
-            @apply p-6 rounded-b-lg shadow-lg;
+            background-color: #FFFFFF;
+            @apply p-6 sm:p-10 rounded-xl shadow-2xl border border-amber-100;
             display: none;
+            animation: fadeIn 0.4s ease-out;
         }
-        .tab-content.active { display: block; }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Service Cards - Wing Tip Style */
+        .service-item {
+            background: white;
+            border: 1px solid #FEF3C7;
+            box-shadow: 0 2px 4px rgba(180, 83, 9, 0.05);
+            @apply p-4 rounded-lg cursor-pointer transition-all border-l-4 border-l-amber-400;
+        }
+        .service-item:hover {
+            background: #FFFBEB;
+            border-l-color: #B45309;
+            transform: translateX(5px);
+        }
+
+        /* Shuffler Styles */
         .image-shuffler {
             position: relative;
             width: 100%;
-            min-height: 468.75px;
+            min-height: 400px;
             overflow: hidden;
-            margin-top: 1.5rem;
+            @apply rounded-lg;
         }
         .shuffler-item-ref {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transition: opacity 1s ease-in-out;
-            display: flex; justify-content: center; align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .shuffler-item-ref.active { opacity: 1; z-index: 1; }
+        .shuffler-item-ref.active {
+            opacity: 1;
+            z-index: 1;
+        }
         .shuffler-item-ref img {
-            max-width: 90%; max-height: 90%;
-            object-fit: contain; border-radius: 0.25rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            @apply rounded shadow-md;
         }
-        @media print {
-            body { margin: 0; padding: 0; font-size: 10pt; }
-            .no-print { display: none; }
-            .tab-content { display: block !important; padding: 0 !important; box-shadow: none !important; border-radius: 0 !important; margin-bottom: 20px; }
-            * { color: #000 !important; background-color: transparent !important; box-shadow: none !important; }
-        }
+
+        /* Modal */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 26, 10, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
-        .modal-overlay.show { opacity: 1; visibility: visible; }
-        .modal-content {
-            background-color: white; padding: 2rem; border-radius: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            max-width: 90%; width: 400px; text-align: center;
-            transform: translateY(-20px); transition: transform 0.3s ease-in-out;
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
         }
-        .modal-overlay.show .modal-content { transform: translateY(0); }
-        .modal-close-button {
-            @apply absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl font-bold;
-            background: none; border: none; cursor: pointer;
+
+        @media print {
+            .no-print { display: none; }
+            .tab-content { display: block !important; border: none; shadow: none; }
         }
-        .service-item {
-            background-color: #FDF8E4;
-            border: 1px solid #FCD34D;
-            @apply cursor-pointer p-3 rounded-md transition-colors duration-200;
-        }
-        .service-item:hover { background-color: #FEF3C7; border-color: #FBBF24; }
     </style>
 </head>
-<body class="bg-yellow-50 text-yellow-900 leading-relaxed p-4 sm:p-6 md:p-8 lg:p-10 max-w-4xl mx-auto rounded-lg shadow-lg my-8">
+<body class="p-4 sm:p-8 lg:p-12 max-w-5xl mx-auto my-6">
 
-    <header class="text-center mb-8 pb-6 border-b-2 border-amber-600">
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-amber-800 mb-2 leading-tight whitespace-nowrap overflow-hidden text-ellipsis">ricobs.github.io - Quality Data Solutions</h1>
+    <header class="text-center mb-10 pb-6 border-b-4 border-double border-amber-600">
+        <div class="flex items-center justify-center gap-3">
+            <span class="text-4xl">🦅</span>
+            <h1 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter">ricobs.github.io</h1>
+        </div>
+        <p class="text-amber-700 font-bold tracking-[0.2em] mt-2 text-sm sm:text-base">PRECISION FROM A BIRD'S EYE VIEW</p>
     </header>
 
-    <nav class="mb-6 no-print pb-2 border-b-2 border-amber-600">
-        <ul class="flex flex-wrap justify-center -mb-px">
-            <li class="mr-2"><a id="about-tab" class="tab-button active" href="#" data-tab-target="about-content">About</a></li>
-            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="services-tab" class="tab-button" href="#" data-tab-target="services-content">Services</a></li>
-            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="work-experience-tab" class="tab-button" href="#" data-tab-target="resume-content">Work Experience</a></li>
-            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="references-tab" class="tab-button" href="#" data-tab-target="references-content">References</a></li>
-            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="certifications-tab" class="tab-button" href="#" data-tab-target="certifications-content">Education</a></li>
-            <li class="flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="contact-tab" class="tab-button" href="#" data-tab-target="contact-tab-content">Contact</a></li>
+    <nav class="mb-8 no-print overflow-x-auto">
+        <ul class="flex justify-center space-x-2 sm:space-x-6 min-w-max pb-2">
+            <li><a class="tab-button active" href="#" data-tab-target="about-content">About</a></li>
+            <li><a class="tab-button" href="#" data-tab-target="services-content">Services</a></li>
+            <li><a class="tab-button" href="#" data-tab-target="resume-content">Experience</a></li>
+            <li><a class="tab-button" href="#" data-tab-target="references-content">References</a></li>
+            <li><a class="tab-button" href="#" data-tab-target="certifications-content">Education</a></li>
+            <li><a class="tab-button" href="#" data-tab-target="contact-tab-content">Contact</a></li>
         </ul>
     </nav>
 
     <div id="tab-content-area">
         <div id="about-content" class="tab-content active">
-            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">About Us</h2>
-            <div class="text-lg text-yellow-900 space-y-4">
-                <p class="font-bold text-xl sm:text-2xl text-yellow-900 mb-4">
-                    At ricobs.github.io, we specialize in providing top-tier data solutions, leveraging robust skills in data management, process optimization, and strategic decision-making. Our proven track record includes enhancing data accuracy, streamlining workflows, and transforming complex data into actionable strategies for business growth.
-                </p>
+            <div class="max-w-3xl">
+                <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Strategic Data Solutions</h2>
+                <div class="text-lg text-yellow-900 space-y-6 leading-relaxed">
+                    <p class="font-bold text-2xl text-amber-800">
+                        Like the Golden Eagle, we combine high-altitude strategic vision with laser-focused execution.
+                    </p>
+                    <p>
+                        At ricobs.github.io, we bridge the gap between complex data architecture and real-world fiscal recovery. 
+                        With a specialized focus on **New York State Medicaid systems**, we manage high-volume databases that ensure millions in monthly recoveries and total regulatory compliance.
+                    </p>
+                    <p>
+                        Our approach is built on the "Golden" standard: local reliability with enterprise-grade analytic power. Whether it’s reducing manual labor by thousands of hours through SQL automation or meeting strict 48-hour turnarounds for OMIG, we deliver precision at scale.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div id="services-content" class="tab-content">
-            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Our Services</h2>
-            <p class="text-lg text-yellow-900 mb-6">Click on any service below to inquire about it:</p>
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Our Services</h2>
+            <p class="text-lg text-amber-800 mb-8 italic">Tailored solutions for government systems and private enterprise.</p>
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
-                <li class="service-item" data-service="Government Data Recovery & Compliance">Government Data Recovery (NYS Medicaid)</li>
-                <li class="service-item" data-service="Health Systems Database Administration">Health Systems Database Administration</li>
+                <li class="service-item" data-service="Medicaid Financial Reconciliation">Medicaid Financial Reconciliation</li>
+                <li class="service-item" data-service="Healthcare Database Administration">Healthcare Database Administration</li>
                 <li class="service-item" data-service="SQL Database Optimization">SQL Database Optimization</li>
-                <li class="service-item" data-service="CRM Data Management">CRM Data Management</li>
                 <li class="service-item" data-service="Business Process Automation">Business Process Automation</li>
+                <li class="service-item" data-service="CRM Data Management">CRM Data Management</li>
                 <li class="service-item" data-service="Dashboard Development">Dashboard Development</li>
                 <li class="service-item" data-service="Data Governance Implementation">Data Governance Implementation</li>
-                <li class="service-item" data-service="Sales Operations Strategy">Sales Operations Strategy</li>
                 <li class="service-item" data-service="Long Form Videography">Long Form Videography & Editing</li>
             </ul>
         </div>
 
         <div id="resume-content" class="tab-content">
-            <main class="w-full">
-                <section class="mb-8 pb-4 section-border">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">TECHNICAL SKILLS</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
-                        <div>
-                            <h3 class="font-semibold text-yellow-900 mb-2">Programming:</h3>
-                            <p>Python, SQL, Excel, Camtasia Studio, Adobe Creative Cloud, Power BI, AdSense, HubSpot, Zoho CRM</p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-yellow-900 mb-2">Frameworks:</h3>
-                            <p>BI Tools, Matplotlib, Jupyter, GitHub, Scikit Learn, Agile Scrum, Asana, Project Management</p>
-                        </div>
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Technical Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-amber-50 p-6 rounded-xl border border-amber-100">
+                    <div>
+                        <h3 class="font-bold text-amber-900 mb-2 underline decoration-amber-500">Programming</h3>
+                        <p class="text-gray-700">Python, SQL, Excel (VBA), Power BI, HubSpot, Zoho</p>
                     </div>
-                </section>
+                    <div>
+                        <h3 class="font-bold text-amber-900 mb-2 underline decoration-amber-500">Frameworks</h3>
+                        <p class="text-gray-700">Scikit Learn, Matplotlib, Agile Scrum, Project Management</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-amber-900 mb-2 underline decoration-amber-500">Expertise</h3>
+                        <p class="text-gray-700">Database Admin, Financial Recovery, OMIG Compliance, Data Governance</p>
+                    </div>
+                </div>
+            </section>
 
-                <section class="mb-8 pb-4 section-border">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">ANALYTIC WORK EXPERIENCE</h2>
+            <section class="space-y-8">
+                <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block">Analytic Work Experience</h2>
 
-                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
-                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Database Administration</h3>
-                        <p class="text-lg text-yellow-900 mb-1">Gainwell Technologies (NYS Medicaid) | Albany, NY</p>
-                        <p class="text-md text-yellow-800 italic mb-3">July 2025 - Present</p>
-                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Supports recovery of <strong>$9 million monthly</strong> for the NYS Medicaid system through advanced data administration.</li>
-                            <li>Maintains and optimizes core Payment, Estates, and Casualty Liens databases to ensure high financial integrity.</li>
-                            <li>Manages SCA 2-day return requests for <strong>OMIG New York Medicaid</strong> systems with 100% adherence to deadlines.</li>
-                            <li>Oversees refund and overpayment databases, ensuring accurate and timely repayment of liens.</li>
-                            <li>Promotes system efficiency by auditing data entry to ensure full capture of state-owned recoveries.</li>
-                        </ul>
-                    </article>
+                <article class="p-6 bg-white border-l-8 border-amber-600 shadow-md rounded-r-xl transition-transform hover:scale-[1.01]">
+                    <div class="flex justify-between items-start flex-wrap">
+                        <h3 class="text-2xl font-bold text-amber-900">Database Administrator</h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Current</span>
+                    </div>
+                    <p class="text-lg text-amber-700 font-semibold">Gainwell Technologies (NY State Medicaid)</p>
+                    <p class="text-sm text-gray-400 italic mb-4">July 2025 - Present | Latham, NY</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Helping recover **$9 million monthly** for the New York Medicaid system through database oversight.</li>
+                        <li>Maintaining Payment, Estates, and Casualty Liens databases for full regulatory compliance.</li>
+                        <li>Managing **SCA 2-day return requests** for OMIG New York Medicaid systems.</li>
+                        <li>Ensuring full payment of liens are repaid in most accurate and timely changes.</li>
+                        <li>Promoting efficiency through database optimization and overpayment reconciliation.</li>
+                    </ul>
+                </article>
 
-                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
-                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Quality Assurance</h3>
-                        <p class="text-lg text-yellow-900 mb-1">Ritchie Bros. Global | Latham NY</p>
-                        <p class="text-md text-yellow-800 italic mb-3">Jan 2025 - July 2025</p>
-                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Processed salvage titles and maintained compliant databases for vehicle sales operations nationwide.</li>
-                            <li>Applied knowledge of title and salvage laws to ensure total regulatory compliance.</li>
-                        </ul>
-                    </article>
+                <article class="p-6 bg-white border-l-8 border-amber-500 shadow-md rounded-r-xl opacity-90">
+                    <h3 class="text-2xl font-bold text-amber-900">Quality Assurance</h3>
+                    <p class="text-lg text-amber-700 font-semibold">Ritchie Bros. Global</p>
+                    <p class="text-sm text-gray-400 italic mb-4">Jan 2025 - July 2025 | Latham, NY</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Processed salvage titles nationwide, applying state-specific laws for full compliance.</li>
+                        <li>Resolved title discrepancies via analytical problem-solving to ensure swift vehicle sales.</li>
+                    </ul>
+                </article>
 
-                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
-                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Enterprise Analyst</h3>
-                        <p class="text-lg text-yellow-900 mb-1">Tech Elevator | Remote</p>
-                        <p class="text-md text-yellow-800 italic mb-3">2023 - Nov 2024</p>
-                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Designed historical sales databases and performed root cause analysis improving target accuracy by 32%.</li>
-                            <li>Managed C-Level communication and data governance policies.</li>
-                        </ul>
-                    </article>
-                </section>
-            </main>
+                <article class="p-6 bg-white border-l-8 border-amber-400 shadow-md rounded-r-xl opacity-80">
+                    <h3 class="text-2xl font-bold text-amber-900">Enterprise Analyst</h3>
+                    <p class="text-lg text-amber-700 font-semibold">Tech Elevator</p>
+                    <p class="text-sm text-gray-400 italic mb-4">2023 - Nov 2024</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Designed historical sales databases, improving sales target accuracy by 32%.</li>
+                        <li>Reduced manual labor by 25,000 hours annually via SQL-based automation.</li>
+                    </ul>
+                </article>
+            </section>
         </div>
 
         <div id="references-content" class="tab-content">
-            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">References</h2>
-            <div id="references-image-shuffler" class="image-shuffler">
-                <div class="shuffler-item-ref active"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference3.png?raw=true" alt="Ref 1"></div>
-                <div class="shuffler-item-ref"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference5.png?raw=true" alt="Ref 2"></div>
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">References</h2>
+            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-inner">
+                <div id="references-image-shuffler" class="image-shuffler">
+                    <div class="shuffler-item-ref active">
+                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference3.png?raw=true" alt="Reference 1">
+                    </div>
+                    <div class="shuffler-item-ref">
+                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference5.png?raw=true" alt="Reference 2">
+                    </div>
+                    <div class="shuffler-item-ref">
+                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference6.png?raw=true" alt="Reference 3">
+                    </div>
+                    <div class="shuffler-item-ref">
+                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference7.png?raw=true" alt="Reference 4">
+                    </div>
+                </div>
             </div>
-            <p class="text-lg text-yellow-900 mt-8">Available upon request.</p>
+            <p class="mt-6 text-center text-amber-900 italic font-medium">Professional references available upon request.</p>
         </div>
 
         <div id="certifications-content" class="tab-content">
-            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Education</h2>
-            <ul class="list-disc list-inside text-lg text-yellow-900 space-y-2 mt-8">
-                <li>Data Science & Machine Learning - BloomTech</li>
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-6">Education & Certifications</h2>
+            <div id="certifications-image-shuffler" class="image-shuffler mb-8">
+                <div class="shuffler-item-ref active">
+                    <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference2.png?raw=true" alt="Cert 1">
+                </div>
+                <div class="shuffler-item-ref">
+                    <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference1.png?raw=true" alt="Cert 2">
+                </div>
+            </div>
+            <ul class="list-disc list-inside text-lg text-amber-900 space-y-2 font-semibold">
+                <li>Data Science & Machine Learning Graduate - BloomTech</li>
                 <li>Hubspot Reporting Certified</li>
+                <li>Camtasia Explorer Certified</li>
             </ul>
         </div>
 
         <div id="contact-tab-content" class="tab-content">
-            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Contact Us</h2>
-            <p><strong>Email:</strong> <a href="mailto:rodricobs@gmail.com">rodricobs@gmail.com</a></p>
+            <h2 class="text-3xl font-bold text-amber-900 eagle-border inline-block mb-8">Connect With Us</h2>
+            <div class="bg-amber-50 p-8 rounded-2xl border border-amber-200 text-center shadow-inner">
+                <p class="text-xl text-amber-900 mb-8 italic">"Ready to coordinate your next strategic flight path? Let's connect."</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-amber-600">
+                        <h3 class="font-bold text-amber-900 text-xl mb-4 text-center">Schedule a Meeting</h3>
+                        <a href="https://calendly.com/rodricobs" target="_blank" class="block bg-gradient-to-r from-amber-600 to-amber-800 text-white font-bold py-4 px-6 rounded-lg transition-transform hover:scale-105 shadow-lg">
+                            🦅 Book on Calendly
+                        </a>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-red-600">
+                        <h3 class="font-bold text-amber-900 text-xl mb-4 text-center">Direct Inquiry</h3>
+                        <a href="mailto:rodricobs@gmail.com" class="block border-2 border-amber-600 text-amber-800 hover:bg-amber-600 hover:text-white font-bold py-4 px-6 rounded-lg transition-colors">
+                            Send an Email
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="contact-modal-overlay" class="modal-overlay">
-        <div class="modal-content relative">
-            <button class="modal-close-button" onclick="hideContactModal()">&times;</button>
-            <h3 class="text-2xl font-bold text-amber-800 mb-4">Inquire About Service</h3>
-            <p class="text-lg text-yellow-900 mb-6"><span id="modal-service-name" class="font-semibold text-orange-600"></span></p>
-            <a id="modal-email-link" href="#" class="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded-md">Send Email</a>
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full relative border-t-8 border-amber-600">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-amber-800 text-2xl font-bold" onclick="hideContactModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-amber-900 mb-2">Service Inquiry</h3>
+            <p class="text-gray-600 mb-6">Discussing: <span id="modal-service-name" class="font-bold text-amber-600"></span></p>
+            <a id="modal-email-link" href="#" class="block w-full text-center bg-amber-600 text-white font-bold py-3 rounded-lg hover:bg-amber-700">Send Email Now</a>
         </div>
     </div>
 
-    <footer class="text-center mt-8 pt-6 border-t-2 border-yellow-300 text-yellow-800 text-sm">
-        <p>&copy; <span id="current-year"></span> ricobs.github.io. All rights reserved.</p>
+    <footer class="text-center mt-12 pt-8 border-t border-amber-200 text-amber-800 text-sm">
+        <p>&copy; <span id="current-year"></span> ricobs.github.io. Precision Solutions from the Ground Up.</p>
     </footer>
 
     <script>
-        let referencesShufflerInterval;
+        let refInterval, certInterval;
+
         document.addEventListener('DOMContentLoaded', () => {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
             const serviceItems = document.querySelectorAll('.service-item');
-            const overlay = document.getElementById('contact-modal-overlay');
+            const modal = document.getElementById('contact-modal-overlay');
 
             function showTab(tabId) {
-                tabButtons.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                document.querySelector(`[data-tab-target="${tabId}"]`).classList.add('active');
-                document.getElementById(tabId).classList.add('active');
+                tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tabTarget === tabId));
+                tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+
+                // Shuffler Management
+                stopShufflers();
+                if (tabId === 'references-content') startShuffler('references-image-shuffler', 'refInterval');
+                if (tabId === 'certifications-content') startShuffler('certifications-image-shuffler', 'certInterval');
             }
 
-            tabButtons.forEach(b => b.addEventListener('click', (e) => {
-                e.preventDefault();
-                showTab(b.dataset.tabTarget);
-            }));
+            function startShuffler(id, intervalVar) {
+                const items = document.querySelectorAll(`#${id} .shuffler-item-ref`);
+                if (!items.length) return;
+                let idx = 0;
+                window[intervalVar] = setInterval(() => {
+                    items[idx].classList.remove('active');
+                    idx = (idx + 1) % items.length;
+                    items[idx].classList.add('active');
+                }, 3000);
+            }
 
-            serviceItems.forEach(item => item.addEventListener('click', () => {
-                const name = item.dataset.service;
-                document.getElementById('modal-service-name').textContent = name;
-                document.getElementById('modal-email-link').href = `mailto:rodricobs@gmail.com?subject=Inquiry: ${name}`;
-                overlay.classList.add('show');
-            }));
+            function stopShufflers() {
+                clearInterval(refInterval);
+                clearInterval(certInterval);
+            }
 
-            window.hideContactModal = () => overlay.classList.remove('show');
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showTab(btn.dataset.tabTarget);
+                });
+            });
+
+            serviceItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const name = item.dataset.service;
+                    document.getElementById('modal-service-name').textContent = name;
+                    document.getElementById('modal-email-link').href = `mailto:rodricobs@gmail.com?subject=Inquiry: ${name}`;
+                    modal.classList.add('show');
+                });
+            });
+
+            window.hideContactModal = () => modal.classList.remove('show');
+            modal.addEventListener('click', (e) => { if(e.target === modal) hideContactModal(); });
+
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>
