@@ -7,208 +7,87 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom CSS to ensure Inter font is applied and for minor adjustments not covered by Tailwind */
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background-color: #FDF8E4; /* Very light, creamy yellow - like masa or light corn */
-            color: #4B5563; /* Tailwind's gray-700, a good neutral dark for readability */
+            background-color: #FDF8E4;
+            color: #4B5563;
         }
-        /* Specific adjustments for list item spacing if needed */
-        ul li {
-            margin-bottom: 0.5rem; /* Adjust as needed for bullet point spacing */
-        }
-        /* Ensure links are styled consistently */
-        a {
-            text-decoration: none;
-            color: #EF4444; /* Red-500 for a chili-like accent */
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #DC2626; /* Darker red on hover */
-        }
-        /* Custom border for sections */
-        .section-border {
-            border-bottom: 1px solid #FCD34D; /* Lighter yellow-orange */
-        }
-
-        /* Tab specific styles */
+        ul li { margin-bottom: 0.5rem; }
+        a { text-decoration: none; color: #EF4444; }
+        a:hover { text-decoration: underline; color: #DC2626; }
+        .section-border { border-bottom: 1px solid #FCD34D; }
         .tab-button {
             @apply px-4 py-2 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-colors duration-200;
-            background-color: transparent; /* Make background transparent for link-like appearance */
-            border-radius: 0; /* Remove border-radius */
-            border-bottom: 2px solid transparent; /* Add transparent bottom border for active state */
-            color: #F59E0B; /* Amber-500 for tab text */
+            background-color: transparent;
+            border-radius: 0;
+            border-bottom: 2px solid transparent;
+            color: #F59E0B;
             transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
         }
-        .tab-button:hover {
-            color: #D97706; /* Deep golden orange on hover */
-        }
+        .tab-button:hover { color: #D97706; }
         .tab-button.active {
-            color: #D97706; /* Deep golden orange for active state */
-            border-bottom-color: #D97706; /* Active underline color (Deep golden orange) */
-            font-weight: 600; /* Make active tab slightly bolder */
+            color: #D97706;
+            border-bottom-color: #D97706;
+            font-weight: 600;
         }
         .tab-content {
-            background-color: #FFFCEB; /* Even lighter cream for content cards */
+            background-color: #FFFCEB;
             @apply p-6 rounded-b-lg shadow-lg;
-            display: none; /* Hidden by default */
+            display: none;
         }
-        .tab-content.active {
-            display: block; /* Shown when active */
-        }
-
-        /* Styles for the image shuffler within the References tab */
+        .tab-content.active { display: block; }
         .image-shuffler {
             position: relative;
             width: 100%;
-            min-height: 468.75px; /* Adjusted from 312.5px by 50% */
+            min-height: 468.75px;
             overflow: hidden;
-            margin-top: 1.5rem; /* Add some space above the shuffler */
+            margin-top: 1.5rem;
         }
         .shuffler-item-ref {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out; /* Smooth fade transition */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1s ease-in-out;
+            display: flex; justify-content: center; align-items: center;
         }
-        .shuffler-item-ref.active {
-            opacity: 1;
-            z-index: 1; /* Bring active item to front */
-        }
+        .shuffler-item-ref.active { opacity: 1; z-index: 1; }
         .shuffler-item-ref img {
-            max-width: 90%; /* Smaller max-width to give some padding */
-            max-height: 90%; /* Smaller max-height */
-            object-fit: contain;
-            border-radius: 0.25rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Kept subtle shadow for images themselves */
+            max-width: 90%; max-height: 90%;
+            object-fit: contain; border-radius: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-
-        /* Adjust for print */
         @media print {
-            body {
-                margin: 0;
-                padding: 0;
-                font-size: 10pt; /* Smaller font for print */
-            }
-            .no-print {
-                display: none; /* Hide tabs and other non-print elements */
-            }
-            .page-break-after {
-                page-break-after: always; /* Force page break after each main section */
-            }
-            .section-border {
-                border-bottom: none; /* Remove borders in print */
-            }
-            /* Ensure text color is black for print */
-            * {
-                color: #000 !important;
-                background-color: transparent !important;
-                box-shadow: none !important;
-                text-shadow: none !important;
-            }
-            a {
-                color: #000 !important;
-                text-decoration: none !important;
-            }
-            /* Ensure all tab content is visible when printing */
-            .tab-content {
-                display: block !important;
-                padding: 0 !important;
-                box-shadow: none !important;
-                border-radius: 0 !important;
-                margin-bottom: 20px; /* Add space between printed sections */
-            }
-            /* Remove padding from body for print */
-            .p-4, .sm\:p-6, .md\:p-8, .lg\:p-10 {
-                padding: 0 !important;
-            }
-            .mx-auto, .my-8 {
-                margin: 0 !important;
-            }
-            .rounded-lg, .shadow-lg {
-                border-radius: 0 !important;
-                box-shadow: none !important;
-            }
-            /* Make reference shuffler images visible for print */
-            .image-shuffler {
-                position: static;
-                height: auto;
-                min-height: auto;
-                box-shadow: none;
-                background-color: transparent;
-            }
-            .shuffler-item-ref {
-                position: static;
-                opacity: 1;
-                display: block;
-                height: auto;
-                margin-bottom: 15px; /* Space between printed images */
-            }
-            .shuffler-item-ref img {
-                max-width: 100%;
-                max-height: none;
-                box-shadow: none;
-            }
+            body { margin: 0; padding: 0; font-size: 10pt; }
+            .no-print { display: none; }
+            .tab-content { display: block !important; padding: 0 !important; box-shadow: none !important; border-radius: 0 !important; margin-bottom: 20px; }
+            * { color: #000 !important; background-color: transparent !important; box-shadow: none !important; }
         }
-
-        /* Modal styles */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; visibility: hidden;
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
+            background-color: white; padding: 2rem; border-radius: 0.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease-in-out;
+            max-width: 90%; width: 400px; text-align: center;
+            transform: translateY(-20px); transition: transform 0.3s ease-in-out;
         }
-        .modal-overlay.show .modal-content {
-            transform: translateY(0);
-        }
+        .modal-overlay.show .modal-content { transform: translateY(0); }
         .modal-close-button {
             @apply absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl font-bold;
-            background: none;
-            border: none;
-            cursor: pointer;
+            background: none; border: none; cursor: pointer;
         }
         .service-item {
-            background-color: #FDF8E4; /* Light corn yellow */
-            border: 1px solid #FCD34D; /* Lighter yellow-orange border */
+            background-color: #FDF8E4;
+            border: 1px solid #FCD34D;
             @apply cursor-pointer p-3 rounded-md transition-colors duration-200;
         }
-        .service-item:hover {
-            background-color: #FEF3C7; /* Slightly darker yellow on hover */
-            border-color: #FBBF24; /* Amber-400 on hover */
-        }
+        .service-item:hover { background-color: #FEF3C7; border-color: #FBBF24; }
     </style>
 </head>
 <body class="bg-yellow-50 text-yellow-900 leading-relaxed p-4 sm:p-6 md:p-8 lg:p-10 max-w-4xl mx-auto rounded-lg shadow-lg my-8">
@@ -217,31 +96,14 @@
         <h1 class="text-2xl sm:text-3xl font-extrabold text-amber-800 mb-2 leading-tight whitespace-nowrap overflow-hidden text-ellipsis">ricobs.github.io - Quality Data Solutions</h1>
     </header>
 
-    <nav class="mb-6 no-print pb-2 border-b-2 border-amber-600"> <!-- Added border-b-2 and border-amber-600 -->
+    <nav class="mb-6 no-print pb-2 border-b-2 border-amber-600">
         <ul class="flex flex-wrap justify-center -mb-px">
-            <li class="mr-2">
-                <a id="about-tab" class="tab-button active" href="#about-content" data-tab-target="about-content">About</a>
-            </li>
-            <li class="mr-2 flex items-center">
-                <span class="text-gray-400 text-lg mx-1">|</span>
-                <a id="services-tab" class="tab-button" href="#services-content" data-tab-target="services-content">Services</a>
-            </li>
-            <li class="mr-2 flex items-center">
-                <span class="text-gray-400 text-lg mx-1">|</span>
-                <a id="work-experience-tab" class="tab-button" href="#resume-content" data-tab-target="resume-content">Work Experience</a>
-            </li>
-            <li class="mr-2 flex items-center">
-                <span class="text-gray-400 text-lg mx-1">|</span>
-                <a id="references-tab" class="tab-button" href="#references-content" data-tab-target="references-content">References</a>
-            </li>
-            <li class="mr-2 flex items-center">
-                <span class="text-gray-400 text-lg mx-1">|</span>
-                <a id="certifications-tab" class="tab-button" href="#certifications-content" data-tab-target="certifications-content">Education</a>
-            </li>
-            <li class="flex items-center">
-                <span class="text-gray-400 text-lg mx-1">|</span>
-                <a id="contact-tab" class="tab-button" href="#contact-tab-content" data-tab-target="contact-tab-content">Contact</a>
-            </li>
+            <li class="mr-2"><a id="about-tab" class="tab-button active" href="#" data-tab-target="about-content">About</a></li>
+            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="services-tab" class="tab-button" href="#" data-tab-target="services-content">Services</a></li>
+            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="work-experience-tab" class="tab-button" href="#" data-tab-target="resume-content">Work Experience</a></li>
+            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="references-tab" class="tab-button" href="#" data-tab-target="references-content">References</a></li>
+            <li class="mr-2 flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="certifications-tab" class="tab-button" href="#" data-tab-target="certifications-content">Education</a></li>
+            <li class="flex items-center"><span class="text-gray-400 text-lg mx-1">|</span><a id="contact-tab" class="tab-button" href="#" data-tab-target="contact-tab-content">Contact</a></li>
         </ul>
     </nav>
 
@@ -250,10 +112,7 @@
             <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">About Us</h2>
             <div class="text-lg text-yellow-900 space-y-4">
                 <p class="font-bold text-xl sm:text-2xl text-yellow-900 mb-4">
-                    At ricobs.github.io, we specialize in providing top-tier data solutions, leveraging robust skills in data management, process optimization, and strategic decision-making. Our proven track record includes enhancing data accuracy, streamlining workflows, and transforming complex data into actionable strategies for business growth. We combine analytic expertise from global asset management and tech education with a strong foundation in operational efficiency, ensuring comprehensive and effective solutions for our clients.
-                </p>
-                <p>
-                    Our team is dedicated to applying cutting-edge analytical techniques to solve real-world business challenges, ensuring your data works for you.
+                    At ricobs.github.io, we specialize in providing top-tier data solutions, leveraging robust skills in data management, process optimization, and strategic decision-making. Our proven track record includes enhancing data accuracy, streamlining workflows, and transforming complex data into actionable strategies for business growth.
                 </p>
             </div>
         </div>
@@ -262,17 +121,15 @@
             <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Our Services</h2>
             <p class="text-lg text-yellow-900 mb-6">Click on any service below to inquire about it:</p>
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
-                <li class="service-item" data-service="Data Analysis & Reporting">Data Analysis & Reporting</li>
+                <li class="service-item" data-service="Government Data Recovery & Compliance">Government Data Recovery (NYS Medicaid)</li>
+                <li class="service-item" data-service="Health Systems Database Administration">Health Systems Database Administration</li>
                 <li class="service-item" data-service="SQL Database Optimization">SQL Database Optimization</li>
                 <li class="service-item" data-service="CRM Data Management">CRM Data Management</li>
                 <li class="service-item" data-service="Business Process Automation">Business Process Automation</li>
-                <li class="service-item" data-service="Market Research & Insights">Market Research & Insights</li>
-                <li class="service-item" data-service="Sales Operations Strategy">Sales Operations Strategy</li>
                 <li class="service-item" data-service="Dashboard Development">Dashboard Development</li>
                 <li class="service-item" data-service="Data Governance Implementation">Data Governance Implementation</li>
-                <li class="service-item" data-service="Customer Segmentation">Customer Segmentation</li>
-                <li class="service-item" data-service="Stakeholder Management & Communication">Stakeholder Management & Communication</li>
-                <li class="service-item" data-service="Long Form Videography & Editing">Long Form Videography & Editing (Weddings, Graduations, Celebrations)</li>
+                <li class="service-item" data-service="Sales Operations Strategy">Sales Operations Strategy</li>
+                <li class="service-item" data-service="Long Form Videography">Long Form Videography & Editing</li>
             </ul>
         </div>
 
@@ -283,15 +140,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
                         <div>
                             <h3 class="font-semibold text-yellow-900 mb-2">Programming:</h3>
-                            <p>Python, SQL, Excel, Camtasia Studio, Adobe Creative Cloud, Power BI, AdSense, HubSpot CRM, Zoho CRM</p>
+                            <p>Python, SQL, Excel, Camtasia Studio, Adobe Creative Cloud, Power BI, AdSense, HubSpot, Zoho CRM</p>
                         </div>
                         <div>
                             <h3 class="font-semibold text-yellow-900 mb-2">Frameworks:</h3>
-                            <p>BI Tools, Matplotlib, Jupyter Notebook, GitHub, Scikit Learn, Agile Scrum, Asana, Project Management</p>
-                        </div>
-                        <div class="col-span-1 md:col-span-2">
-                            <h3 class="font-semibold text-yellow-900 mb-2">Skills:</h3>
-                            <p>Sales Operations, CRM Management, Dashboard Development, Data Governance, Storytelling, Reporting</p>
+                            <p>BI Tools, Matplotlib, Jupyter, GitHub, Scikit Learn, Agile Scrum, Asana, Project Management</p>
                         </div>
                     </div>
                 </section>
@@ -300,15 +153,25 @@
                     <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">ANALYTIC WORK EXPERIENCE</h2>
 
                     <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
+                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Database Administration</h3>
+                        <p class="text-lg text-yellow-900 mb-1">Gainwell Technologies (NYS Medicaid) | Albany, NY</p>
+                        <p class="text-md text-yellow-800 italic mb-3">July 2025 - Present</p>
+                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
+                            <li>Supports recovery of <strong>$9 million monthly</strong> for the NYS Medicaid system through advanced data administration.</li>
+                            <li>Maintains and optimizes core Payment, Estates, and Casualty Liens databases to ensure high financial integrity.</li>
+                            <li>Manages SCA 2-day return requests for <strong>OMIG New York Medicaid</strong> systems with 100% adherence to deadlines.</li>
+                            <li>Oversees refund and overpayment databases, ensuring accurate and timely repayment of liens.</li>
+                            <li>Promotes system efficiency by auditing data entry to ensure full capture of state-owned recoveries.</li>
+                        </ul>
+                    </article>
+
+                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
                         <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Quality Assurance</h3>
                         <p class="text-lg text-yellow-900 mb-1">Ritchie Bros. Global | Latham NY</p>
-                        <p class="text-md text-yellow-800 italic mb-3">Jan 2025 - Present</p>
+                        <p class="text-md text-yellow-800 italic mb-3">Jan 2025 - July 2025</p>
                         <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Accurately processed salvage titles, maintaining a compliant database for all vehicle sales operations nationwide.</li>
-                            <li>Applied comprehensive knowledge of title and salvage law across all states to ensure total regulatory compliance.</li>
-                            <li>Provided accurate responses to inquiries, consistently enhancing customer experience and satisfaction outcomes.</li>
-                            <li>Efficiently entered and updated vehicle data, ensuring data accuracy for seamless record-keeping processes.</li>
-                            <li>Resolved title discrepancies by applying analytical and problem-solving capabilities to achieve swift resolutions.</li>
+                            <li>Processed salvage titles and maintained compliant databases for vehicle sales operations nationwide.</li>
+                            <li>Applied knowledge of title and salvage laws to ensure total regulatory compliance.</li>
                         </ul>
                     </article>
 
@@ -317,51 +180,8 @@
                         <p class="text-lg text-yellow-900 mb-1">Tech Elevator | Remote</p>
                         <p class="text-md text-yellow-800 italic mb-3">2023 - Nov 2024</p>
                         <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Designed and implemented a historical sales database, enabling the creation of custom reports for decision-making.</li>
-                            <li>Designed data governance policies, created technical documentation, and introduced Master Data Management.</li>
-                            <li>Constructed an enterprise go-to-market plan, ensuring a data-driven approach to marketing initiatives.</li>
-                            <li>Performed root cause analysis of data leaks, implementing data quality that improved sales target accuracy by 32%.</li>
-                            <li>Restructured CRM data, used it to perform customer segmentation analysis improving marketing campaign targets.</li>
-                            <li>Leveraged Lightcast data to create targeted account lists, empowering sales teams to focus on customers.</li>
-                            <li>Managed C-Level staff, facilitating discussions by providing talking points.</li>
-                        </ul>
-                    </article>
-
-                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
-                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Business Analyst</h3>
-                        <p class="text-lg text-yellow-900 mb-1">Tech Elevator | Remote</p>
-                        <p class="text-md text-yellow-800 italic mb-3">May 2022 - 2023</p>
-                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Designed and implemented SQL based automation and workflows, reducing manual labor by 25,000 hours annually.</li>
-                            <li>Improved data accuracy from 60% to 98% through SQL engineering and standardized auditing processes.</li>
-                            <li>Conducted in-depth market research, incorporating national demographics to inform strategic decision-making.</li>
-                            <li>Championed a modern approach to CRM data management addressing data inaccuracies.</li>
-                            <li>Gathered system and business requirements and managed stakeholders effectively.</li>
-                        </ul>
-                    </article>
-                </section>
-
-                <section class="mb-8 pb-4 section-border">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">HOSPITALITY WORK EXPERIENCE</h2>
-
-                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
-                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Lead Steward</h3>
-                        <p class="text-lg text-yellow-900 mb-1">UnCruise Cruise Lines | Seattle, WA</p>
-                        <p class="text-md text-yellow-800 italic mb-3">2018 - 2020</p>
-                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Performed over 186 client-facing interactions per day to fulfill a variety of guest needs and requests.</li>
-                            <li>Improved overall customer satisfaction from 74% to 80% following weekly independent surveys.</li>
-                            <li>Coordinated unique dietary selections for 100-150 passengers and ensured a safe dining experience.</li>
-                        </ul>
-                    </article>
-
-                    <article class="mb-6 p-4 border-l-4 border-orange-400 bg-yellow-100 shadow-sm rounded-md">
-                        <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Lead Steward</h3>
-                        <p class="text-lg text-yellow-900 mb-1">American Cruise Lines | Guliford, CT</p>
-                        <p class="text-md text-yellow-800 italic mb-3">2017 - 2018</p>
-                        <ul class="list-disc list-inside text-lg text-yellow-900 space-y-1">
-                            <li>Led new member training procedures and reduced amount of service inaccuracies by 37.5%.</li>
-                            <li>Recognized by guests and management for wonderful service, generating 6+ positive reviews weekly.</li>
+                            <li>Designed historical sales databases and performed root cause analysis improving target accuracy by 32%.</li>
+                            <li>Managed C-Level communication and data governance policies.</li>
                         </ul>
                     </article>
                 </section>
@@ -370,57 +190,24 @@
 
         <div id="references-content" class="tab-content">
             <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">References</h2>
-            <section class="mt-8">
-                <div id="references-image-shuffler" class="image-shuffler">
-                    <div class="shuffler-item-ref active">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference3.png?raw=true" alt="Professional Reference Image 1">
-                    </div>
-                    <div class="shuffler-item-ref">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference5.png?raw=true" alt="Professional Reference Image 2">
-                    </div>
-                    <div class="shuffler-item-ref">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference6.png?raw=true" alt="Professional Reference Image 3">
-                    </div>
-                    <div class="shuffler-item-ref">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference7.png?raw=true" alt="Professional Reference Image 4">
-                    </div>
-                    <div class="shuffler-item-ref">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference8.png?raw=true" alt="Professional Reference Image 5">
-                    </div>
-                </div>
-            </section>
-            <p class="text-lg text-yellow-900 mb-4 mt-8">References are available upon request.</p>
+            <div id="references-image-shuffler" class="image-shuffler">
+                <div class="shuffler-item-ref active"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference3.png?raw=true" alt="Ref 1"></div>
+                <div class="shuffler-item-ref"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference5.png?raw=true" alt="Ref 2"></div>
+            </div>
+            <p class="text-lg text-yellow-900 mt-8">Available upon request.</p>
         </div>
 
         <div id="certifications-content" class="tab-content">
-            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Certifications & Education</h2>
-            <section class="mt-8">
-                <div id="certifications-image-shuffler" class="image-shuffler">
-                    <div class="shuffler-item-ref active">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference2.png?raw=true" alt="Certification Image 1">
-                    </div>
-                    <div class="shuffler-item-ref">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference1.png?raw=true" alt="Certification Image 2">
-                    </div>
-                    <div class="shuffler-item-ref">
-                        <img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference4.png?raw=true" alt="Certification Image 3">
-                    </div>
-                </div>
-            </section>
+            <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Education</h2>
             <ul class="list-disc list-inside text-lg text-yellow-900 space-y-2 mt-8">
-                <li>Data Science & Machine Learning Graduate- BloomTech (2022)</li>
+                <li>Data Science & Machine Learning - BloomTech</li>
                 <li>Hubspot Reporting Certified</li>
-                <li>Camtasia Explorer Certified</li>
             </ul>
         </div>
 
         <div id="contact-tab-content" class="tab-content">
             <h2 class="text-2xl sm:text-3xl font-bold text-amber-800 mb-4 pb-2 border-b-2 border-yellow-300 inline-block">Contact Us</h2>
-            <p class="text-lg text-yellow-900 space-y-4">
-                For inquiries, collaborations, or to learn more about our services, please feel free to reach out to us:
-            </p>
-            <p><strong>Email:</strong> <a href="mailto:rodricobs@gmail.com" class="text-red-600 hover:text-red-700">rodricobs@gmail.com</a></p>
-            <p>We look forward to hearing from you!</p>
+            <p><strong>Email:</strong> <a href="mailto:rodricobs@gmail.com">rodricobs@gmail.com</a></p>
         </div>
     </div>
 
@@ -428,8 +215,8 @@
         <div class="modal-content relative">
             <button class="modal-close-button" onclick="hideContactModal()">&times;</button>
             <h3 class="text-2xl font-bold text-amber-800 mb-4">Inquire About Service</h3>
-            <p class="text-lg text-yellow-900 mb-6">You're about to send an email regarding: <span id="modal-service-name" class="font-semibold text-orange-600"></span></p>
-            <a id="modal-email-link" href="#" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md transition-colors duration-200">Send Email</a>
+            <p class="text-lg text-yellow-900 mb-6"><span id="modal-service-name" class="font-semibold text-orange-600"></span></p>
+            <a id="modal-email-link" href="#" class="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded-md">Send Email</a>
         </div>
     </div>
 
@@ -438,137 +225,33 @@
     </footer>
 
     <script>
-        let referencesShufflerInterval; // Variable to hold the interval ID for references images
-        let certificationsShufflerInterval; // Variable to hold the interval ID for certifications images
-
+        let referencesShufflerInterval;
         document.addEventListener('DOMContentLoaded', () => {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
-            const serviceItems = document.querySelectorAll('.service-item'); // Select all service items
-            const contactModalOverlay = document.getElementById('contact-modal-overlay');
-            const modalServiceName = document.getElementById('modal-service-name');
-            const modalEmailLink = document.getElementById('modal-email-link');
+            const serviceItems = document.querySelectorAll('.service-item');
+            const overlay = document.getElementById('contact-modal-overlay');
 
-            // Function to show a specific tab
             function showTab(tabId) {
-                // Deactivate all tab buttons and hide all tab contents
-                tabButtons.forEach(button => button.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                // Activate the clicked tab button
-                const activeButton = document.querySelector(`[data-tab-target="${tabId}"]`);
-                if (activeButton) {
-                    activeButton.classList.add('active');
-                }
-
-                // Show the corresponding tab content
-                const activeContent = document.getElementById(tabId);
-                if (activeContent) {
-                    activeContent.classList.add('active');
-                }
-
-                // Manage the references image shuffler
-                if (tabId === 'references-content') {
-                    startShuffler('references-image-shuffler', 'referencesShufflerInterval');
-                } else {
-                    stopShuffler('referencesShufflerInterval');
-                }
-
-                // Manage the certifications image shuffler
-                if (tabId === 'certifications-content') {
-                    startShuffler('certifications-image-shuffler', 'certificationsShufflerInterval');
-                } else {
-                    stopShuffler('certificationsShufflerInterval');
-                }
+                tabButtons.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                document.querySelector(`[data-tab-target="${tabId}"]`).classList.add('active');
+                document.getElementById(tabId).classList.add('active');
             }
 
-            // Generic function to start an image shuffler
-            function startShuffler(shufflerId, intervalVarName) {
-                // Clear any existing interval to prevent multiple shufflers running
-                stopShuffler(intervalVarName);
+            tabButtons.forEach(b => b.addEventListener('click', (e) => {
+                e.preventDefault();
+                showTab(b.dataset.tabTarget);
+            }));
 
-                const shufflerItems = document.querySelectorAll(`#${shufflerId} .shuffler-item-ref`);
-                if (shufflerItems.length === 0) return; // Exit if no images
+            serviceItems.forEach(item => item.addEventListener('click', () => {
+                const name = item.dataset.service;
+                document.getElementById('modal-service-name').textContent = name;
+                document.getElementById('modal-email-link').href = `mailto:rodricobs@gmail.com?subject=Inquiry: ${name}`;
+                overlay.classList.add('show');
+            }));
 
-                let currentIndex = 0;
-
-                // Ensure only the first image is active initially when starting
-                shufflerItems.forEach((item, index) => {
-                    if (index === 0) {
-                        item.classList.add('active');
-                        item.style.zIndex = 1; // Ensure active is on top
-                    } else {
-                        item.classList.remove('active');
-                        item.style.zIndex = 0; // Ensure inactive is behind
-                    }
-                });
-
-                function showNextItem() {
-                    // Hide current item
-                    shufflerItems[currentIndex].classList.remove('active');
-                    shufflerItems[currentIndex].style.zIndex = 0; // Move current to back
-
-                    // Move to next item
-                    currentIndex = (currentIndex + 1) % shufflerItems.length;
-
-                    // Show next item
-                    shufflerItems[currentIndex].classList.add('active');
-                    shufflerItems[currentIndex].style.zIndex = 1; // Bring next to front
-                }
-
-                // Assign the interval ID to the correct global variable
-                window[intervalVarName] = setInterval(showNextItem, 3000); // Shuffles every 3 seconds
-            }
-
-            // Generic function to stop an image shuffler
-            function stopShuffler(intervalVarName) {
-                if (window[intervalVarName]) {
-                    clearInterval(window[intervalVarName]);
-                    window[intervalVarName] = null;
-                }
-            }
-
-            // Function to show the contact modal
-            function showContactModal(serviceName) {
-                modalServiceName.textContent = serviceName;
-                const emailSubject = encodeURIComponent(`Inquiry about ${serviceName}`);
-                modalEmailLink.href = `mailto:rodricobs@gmail.com?subject=${emailSubject}`;
-                contactModalOverlay.classList.add('show');
-            }
-
-            // Function to hide the contact modal
-            window.hideContactModal = function() { // Made global for onclick in HTML
-                contactModalOverlay.classList.remove('show');
-            };
-
-            // Add click event listeners to all tab buttons
-            tabButtons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    event.preventDefault(); // Prevent default anchor link behavior
-                    const tabId = button.dataset.tabTarget;
-                    showTab(tabId);
-                });
-            });
-
-            // Add click event listeners to service items
-            serviceItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const serviceName = item.dataset.service;
-                    showContactModal(serviceName);
-                });
-            });
-
-            // Hide modal if overlay is clicked
-            contactModalOverlay.addEventListener('click', (event) => {
-                if (event.target === contactModalOverlay) {
-                    hideContactModal();
-                }
-            });
-
-            // Set the initial active tab (About)
-            showTab('about-content'); // 'about-content' is now the 'About' section
-
-            // JavaScript to automatically update the copyright year
+            window.hideContactModal = () => overlay.classList.remove('show');
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>
