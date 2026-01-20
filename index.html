@@ -25,7 +25,7 @@
         .timeline-box { @apply relative pl-8 border-l-2 border-amber-200 mb-10; }
         .timeline-marker { @apply absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-amber-600; }
 
-        .shuffler-container { position: relative; width: 100%; min-height: 400px; @apply rounded-2xl bg-amber-50/50 overflow-hidden; }
+        .shuffler-container { position: relative; width: 100%; min-height: 450px; @apply rounded-2xl bg-amber-50/50 overflow-hidden; }
         .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; @apply flex items-center justify-center p-6; }
         .shuffler-item.active { opacity: 1; z-index: 10; }
         .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg; }
@@ -35,13 +35,12 @@
 
     <header class="text-center mb-16">
         <div class="flex flex-col items-center">
-            <img src="ricobsdatabase.jpg" alt="ricobs logo" class="h-36 w-36 object-contain mb-4 rounded-full border-4 border-amber-500 shadow-lg bg-white" onerror="this.style.display='none'; document.getElementById('emoji-fallback').style.display='block';">
-            <span id="emoji-fallback" class="text-7xl hidden mb-4">🦅</span>
+            <img src="ricobsdatabase.jpg" alt="ricobs logo" class="h-36 w-36 object-contain mb-4 rounded-full border-4 border-amber-500 shadow-lg bg-white">
             <h1 class="text-5xl sm:text-6xl font-black tracking-tight mb-2">RICOBS</h1>
             <div class="flex items-center gap-3 justify-center mb-2">
-                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200">REMOTE & GLOBAL READY</span>
+                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-200 uppercase">Remote & Global Strategy</span>
             </div>
-            <p class="text-amber-800 font-bold tracking-widest text-xs sm:text-sm uppercase italic decoration-amber-500 underline decoration-2">Good People. Great Data. Solid Results.</p>
+            <p class="text-amber-800 font-bold tracking-widest text-xs sm:text-sm uppercase italic decoration-amber-500 underline decoration-2">Honest Work. World-Class Data.</p>
         </div>
     </header>
 
@@ -57,17 +56,13 @@
         <div id="the-vision" class="tab-content active">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-4xl font-black text-amber-900 mb-6">Honest Work. Real Impact.</h2>
+                    <h2 class="text-4xl font-black text-amber-900 mb-6">Built to Serve, Anywhere.</h2>
                     <p class="text-xl text-amber-950 leading-relaxed mb-6">
-                        I look at data as the lifeblood of an organization. I treat every database like a local business—with personal care, transparency, and a lot of heart.
+                        I look at data as more than just rows in a table. It's the lifeblood of a business. I treat every project with the personal care of a local shop, backed by the experience of a global enterprise.
                     </p>
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-                        Whether I'm helping NY State recover **$9 million every month** or building automation for a global team, I approach it with the same focus on integrity and clear communication.
+                        Currently, I help manage the recovery of **$9 million every month** for New York State. While my roots are in the Capital Region, my solutions are designed to scale for teams across the globe.
                     </p>
-                    <div class="flex gap-4">
-                        <span class="bg-amber-100 px-4 py-2 rounded-lg text-amber-900 font-bold text-xs uppercase">Trusted Specialist</span>
-                        <span class="bg-amber-100 px-4 py-2 rounded-lg text-amber-900 font-bold text-xs uppercase">Always Accountable</span>
-                    </div>
                 </div>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="impact-card">
@@ -83,41 +78,41 @@
         </div>
 
         <div id="the-journey" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-10">Where I've Been</h2>
+            <h2 class="text-3xl font-black text-amber-900 mb-10">The Track Record</h2>
             <div class="max-w-3xl mx-auto">
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
                     <h3 class="text-xl font-black text-amber-900">Database Administrator | Gainwell Technologies</h3>
                     <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2025 - Present</p>
-                    <p class="text-gray-700 leading-relaxed">Securing revenue for NY State Medicaid. It’s high-volume, high-stakes work where attention to detail is everything.</p>
+                    <p class="text-gray-700 leading-relaxed">Securing revenue lifecycles for the NY State Medicaid system. High-volume, high-stakes work where accuracy is the only option.</p>
                 </div>
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
-                    <h3 class="text-xl font-black text-amber-900">Quality Assurance | Ritchie Bros. Global</h3>
+                    <h3 class="text-xl font-black text-amber-900">Quality Assurance Analyst | Ritchie Bros. Global</h3>
                     <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2024 - 2025</p>
-                    <p class="text-gray-700 leading-relaxed">Handled nationwide title logic and asset integrity. I ensured the data was as solid as the equipment being sold.</p>
+                    <p class="text-gray-700 leading-relaxed">Navigated nationwide title logic and asset integrity. I ensured global liquidations were supported by rock-solid data governance.</p>
                 </div>
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
                     <h3 class="text-xl font-black text-amber-900">Enterprise Data Analyst | Tech Elevator</h3>
                     <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2022 - 2024</p>
-                    <p class="text-gray-700 leading-relaxed">My foundation in automation. I focused on building SQL/Python tools that let people spend less time on spreadsheets and more time on strategy.</p>
+                    <p class="text-gray-700 leading-relaxed">My foundational first role in automation. I developed the SQL and Python pipelines that eliminated massive manual bottlenecks.</p>
                 </div>
             </div>
         </div>
 
         <div id="the-tools" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase tracking-tighter">The Toolkit</h2>
+            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center">My Technical Toolkit</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
-                    <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Building with SQL</h3>
-                    <p class="text-sm text-gray-600 mb-4">I use SQL to keep things organized and find the "missing pieces" that others might overlook.</p>
-                    <div class="code-window">-- Catching revenue leakage<br>SELECT lien_id FROM mes_liens WHERE last_active < NOW()-30;</div>
+                    <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Enterprise SQL</h3>
+                    <p class="text-sm text-gray-600 mb-4">Finding the revenue leakage others miss through precise query architecture.</p>
+                    <div class="code-window">SELECT lien_id FROM mes_liens WHERE last_active < NOW()-30;</div>
                 </div>
                 <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
-                    <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Scaling with Python</h3>
-                    <p class="text-sm text-gray-600 mb-4">I love using Python to automate the boring stuff, no matter where in the world the server is located.</p>
-                    <div class="code-window"># Automated bridge for state requests<br>matches = pd.merge(state_req, db_master, on='uid')</div>
+                    <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Python Automation</h3>
+                    <p class="text-sm text-gray-600 mb-4">Building bridge logic that handles thousands of requests in seconds.</p>
+                    <div class="code-window">matches = pd.merge(state_req, db_master, on='uid')</div>
                 </div>
             </div>
         </div>
@@ -125,21 +120,26 @@
         <div id="vouched" class="tab-content">
             <h2 class="text-3xl font-black text-amber-900 mb-8 text-center">People I've Helped</h2>
             <div class="shuffler-container">
-                <div class="shuffler-item active"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference3.png?raw=true" alt="Ref 1"></div>
-                <div class="shuffler-item"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference5.png?raw=true" alt="Ref 2"></div>
-                <div class="shuffler-item"><img src="https://github.com/ricobs/ricobs.github.io/blob/main/reference1.png?raw=true" alt="Ref 3"></div>
+                <div class="shuffler-item active"><img src="reference1.png" alt="Reference 1"></div>
+                <div class="shuffler-item"><img src="reference2.png" alt="Reference 2"></div>
+                <div class="shuffler-item"><img src="reference3.png" alt="Reference 3"></div>
+                <div class="shuffler-item"><img src="reference4.png" alt="Reference 4"></div>
+                <div class="shuffler-item"><img src="reference5.png" alt="Reference 5"></div>
+                <div class="shuffler-item"><img src="reference6.png" alt="Reference 6"></div>
+                <div class="shuffler-item"><img src="reference7.png" alt="Reference 7"></div>
+                <div class="shuffler-item"><img src="reference8.png" alt="Reference 8"></div>
             </div>
         </div>
 
         <div id="connect" class="tab-content">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl font-black text-amber-900 mb-6">Let's Grab Coffee (Or a Zoom)</h2>
+                <h2 class="text-4xl font-black text-amber-900 mb-6">Let's Solve Your Data Headaches</h2>
                 <div class="bg-amber-900 p-12 rounded-[2.5rem] shadow-2xl">
                     <p class="text-amber-100 text-xl mb-10 font-medium">
-                        Based in New York, but built for the world. I'm fully equipped for remote collaboration and ready to help your team solve their toughest data troubles.
+                        Based in NY, serving the world. I'm fully set up for remote partnership and ready to help you secure your revenue through better data.
                     </p>
                     <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                        <a href="https://calendly.com/rodricobs" target="_blank" class="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-amber-950 font-black py-5 px-10 rounded-2xl transition-all transform hover:scale-105 shadow-xl uppercase">🦅 Chat via Calendly</a>
+                        <a href="https://calendly.com/rodricobs" target="_blank" class="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-amber-950 font-black py-5 px-10 rounded-2xl transition-all transform hover:scale-105 shadow-xl uppercase">🦅 Book Flight Path</a>
                         <a href="mailto:rodricobs@gmail.com" class="w-full md:w-auto border-2 border-amber-500 text-amber-100 py-5 px-10 rounded-2xl font-bold hover:bg-amber-800 transition-all uppercase">Say Hello</a>
                     </div>
                 </div>
@@ -148,8 +148,8 @@
     </div>
 
     <footer class="text-center mt-16 py-8 border-t border-amber-200">
-        <p class="text-amber-800 font-bold text-xs uppercase tracking-widest italic decoration-amber-400 underline decoration-2">ricobs.github.io | Albany to the World | Proven Results.</p>
-        <p class="text-amber-600 text-[10px] mt-2">&copy; <span id="year"></span> | From Tech Elevator to Global Solutions.</p>
+        <p class="text-amber-800 font-bold text-xs uppercase tracking-widest italic decoration-amber-400 underline decoration-2">ricobs.github.io | Albany to the World</p>
+        <p class="text-amber-600 text-[10px] mt-2">&copy; <span id="year"></span> | Proven Results across every border.</p>
     </footer>
 
     <script>
