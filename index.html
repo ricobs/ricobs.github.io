@@ -28,7 +28,7 @@
         
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Credentials Shuffler - Clean Version */
+        /* Credentials Shuffler */
         .shuffler-container { position: relative; width: 100%; height: 500px; @apply rounded-[2rem] bg-stone-100 overflow-hidden flex items-center justify-center border-[12px] border-white shadow-xl; }
         .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease-in-out; @apply flex items-center justify-center p-4; visibility: hidden; }
         .shuffler-item.active { opacity: 1; visibility: visible; }
@@ -38,9 +38,8 @@
         .timeline-item { @apply relative pl-16 border-l-4 border-stone-100 pb-16 last:pb-0; }
         .timeline-dot { @apply absolute -left-[14px] top-1 h-6 w-6 rounded-full bg-stone-800 ring-8 ring-white; }
 
-        /* Contact Modal Styles */
+        /* Modals */
         #contact-modal { display: none; position: fixed; inset: 0; background: rgba(26, 28, 25, 0.9); z-index: 2000; @apply items-center justify-center p-6 backdrop-blur-md; }
-        
         #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; @apply flex flex-col items-center justify-center p-4; }
         #lightbox img { @apply max-w-[95%] max-h-[85%] object-contain; }
     </style>
@@ -114,35 +113,35 @@
         </section>
 
         <section id="journey" class="tab-content">
-            <h2 class="text-5xl font-black mb-16 uppercase tracking-tighter text-stone-800">Complete History</h2>
+            <h2 class="text-5xl font-black mb-16 uppercase tracking-tighter text-stone-800">Professional History</h2>
             <div class="max-w-4xl">
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--cactus-green);"></div>
                     <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Current</span>
                     <h3 class="text-3xl font-black mt-4">Database Administrator | Gainwell</h3>
-                    <p class="text-orange-600 font-bold text-sm mb-4">2025 – PRESENT</p>
-                    <p class="text-stone-600 text-lg">Overseeing critical database lifecycles for New York State Medicaid financial recoveries. Responsible for maintaining 100% uptime and data integrity for pipelines processing $9M+ monthly.</p>
+                    <p class="text-orange-600 font-bold text-sm mb-4">2024 – PRESENT</p>
+                    <p class="text-stone-600 text-lg">Managing critical database architecture on behalf of <strong>NYS Medicaid</strong>. Ensuring financial integrity and high-availability for recovery systems processing $9M+ monthly.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--terracotta);"></div>
-                    <span class="bg-stone-100 text-stone-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Global Ops</span>
+                    <span class="bg-stone-100 text-stone-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Database Operations</span>
                     <h3 class="text-3xl font-black mt-4">QA Analyst | Ritchie Bros.</h3>
                     <p class="text-stone-400 font-bold text-sm mb-4">2024 – 2025</p>
-                    <p class="text-stone-600 text-lg">Engineered logic synchronization for global industrial auctions. Performed high-volume data verification across international markets to ensure auction finality and financial accuracy.</p>
+                    <p class="text-stone-600 text-lg">Spearheaded data verification and integrity audits for the <strong>Global Used Industrial Asset Database</strong>. Synced complex logic across international auction markets to ensure financial finality.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: #CBD5E1;"></div>
-                    <span class="bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Technical Foundation</span>
-                    <h3 class="text-3xl font-black mt-4">Apprentice | Tech Elevator</h3>
-                    <p class="text-stone-400 font-bold text-sm mb-4">2023</p>
-                    <p class="text-stone-600 text-lg">Immersive 800+ hour residency in full-stack Java development. Specialized in SQL database design, relational mapping, and enterprise software architecture.</p>
+                    <span class="bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Market Strategy</span>
+                    <h3 class="text-3xl font-black mt-4">Enterprise Sales Analyst</h3>
+                    <p class="text-stone-400 font-bold text-sm mb-4">2023 – 2024</p>
+                    <p class="text-stone-600 text-lg">Executed high-level market data analysis and sales logic optimization. Developed data-driven frameworks to scale enterprise-level revenue pipelines.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: #E2E8F0;"></div>
-                    <span class="bg-stone-100 text-stone-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Strategic Beginnings</span>
-                    <h3 class="text-3xl font-black mt-4">Early Startup Hire #107</h3>
+                    <span class="bg-stone-100 text-stone-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Technical Foundation</span>
+                    <h3 class="text-3xl font-black mt-4">Business Analyst | Tech Elevator</h3>
                     <p class="text-stone-400 font-bold text-sm mb-4">2021 – 2023</p>
-                    <p class="text-stone-600 text-lg">Instrumental in scaling operations during rapid growth phases. Focused on the intersection of data accuracy and operational efficiency.</p>
+                    <p class="text-stone-600 text-lg">Core analyst focusing on technical operations and data-centric business processes. Built the foundational logic for rapid technical scaling.</p>
                 </div>
             </div>
         </section>
@@ -178,48 +177,57 @@
                     <button onclick="toggleContactModal(true)" class="bg-white text-stone-900 font-black py-8 px-16 rounded-3xl shadow-2xl hover:bg-orange-600 hover:text-white transition-all text-xl uppercase tracking-widest">
                         🌵 Access Scheduling Hub
                     </button>
-                    <p class="text-stone-500 font-bold uppercase text-xs tracking-[0.5em]">Direct Access 24/7</p>
+                    <p class="text-stone-500 font-bold uppercase text-xs tracking-[0.5em]">Strategize • Audit • Implement</p>
                 </div>
             </div>
         </section>
     </main>
 
     <div id="contact-modal" onclick="toggleContactModal(false)">
-        <div class="bg-white rounded-[3rem] max-w-2xl w-full p-12 shadow-2xl text-center relative border-[10px] border-cactus-green" onclick="event.stopPropagation()">
-            <h3 class="text-4xl font-black mb-8 uppercase tracking-tighter">Scheduling Hub</h3>
+        <div class="bg-white rounded-[4rem] max-w-3xl w-full p-12 shadow-2xl relative border-[10px] border-cactus-green overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
             
-            <div class="grid gap-4 mb-10">
-                <a href="https://calendly.com/rodricobs/initial-meeting" target="_blank" class="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group text-left">
-                    <div>
-                        <h4 class="font-black text-lg">Initial Meeting</h4>
-                        <p class="text-sm text-stone-500">Introductory discussion & synergy check.</p>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-black mb-6 uppercase tracking-tighter">1. Select Path</h3>
+                    <div class="space-y-3">
+                        <a href="https://calendly.com/rodricobs" target="_blank" class="block p-5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group">
+                            <h4 class="font-black text-sm uppercase">Integrity Audit</h4>
+                            <p class="text-[11px] text-stone-500">Analyze current database vulnerabilities.</p>
+                        </a>
+                        <a href="https://calendly.com/rodricobs" target="_blank" class="block p-5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group">
+                            <h4 class="font-black text-sm uppercase">Strategic Growth</h4>
+                            <p class="text-[11px] text-stone-500">Scaling data logic for revenue capture.</p>
+                        </a>
+                        <a href="https://calendly.com/rodricobs" target="_blank" class="block p-5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group">
+                            <h4 class="font-black text-sm uppercase">Architecture Review</h4>
+                            <p class="text-[11px] text-stone-500">Database lifecycle & recovery planning.</p>
+                        </a>
                     </div>
-                    <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
-                </a>
-                <a href="https://calendly.com/rodricobs/consulting" target="_blank" class="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group text-left">
-                    <div>
-                        <h4 class="font-black text-lg">Database Consulting</h4>
-                        <p class="text-sm text-stone-500">Deep dive into data lifecycle & architecture.</p>
-                    </div>
-                    <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
-                </a>
-                <a href="https://calendly.com/rodricobs/strategy" target="_blank" class="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-200 hover:border-cactus-green transition-all group text-left">
-                    <div>
-                        <h4 class="font-black text-lg">Strategy Call</h4>
-                        <p class="text-sm text-stone-500">High-level growth & operational logic.</p>
-                    </div>
-                    <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
-                </a>
-            </div>
+                </div>
 
-            <div class="h-px bg-stone-100 mb-8"></div>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 bg-stone-100 p-4 rounded-3xl">
-                <span class="font-black text-stone-900">rodricobs@gmail.com</span>
-                <button id="copy-btn" onclick="copyEmailToClipboard()" class="bg-stone-900 text-white font-black px-8 py-3 rounded-2xl uppercase text-[10px] tracking-widest hover:bg-orange-600 transition-colors">
-                    Click to Copy Email
-                </button>
+                <div>
+                    <h3 class="text-2xl font-black mb-6 uppercase tracking-tighter">2. Inquiry Logic</h3>
+                    <div class="space-y-3 mb-8">
+                        <button onclick="copySpecificEmail('Local Business Inquiry')" class="w-full text-left p-5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-terracotta transition-all group">
+                            <h4 class="font-black text-sm uppercase">Local Business</h4>
+                            <p class="text-[11px] text-stone-500">Direct support for regional operations.</p>
+                        </button>
+                        <button onclick="copySpecificEmail('Enterprise Partnership')" class="w-full text-left p-5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-terracotta transition-all group">
+                            <h4 class="font-black text-sm uppercase">Enterprise Ops</h4>
+                            <p class="text-[11px] text-stone-500">Scale-ready data integrity solutions.</p>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-stone-900 p-5 rounded-2xl text-center">
+                        <span id="email-display" class="block text-white font-bold text-sm mb-3">rodricobs@gmail.com</span>
+                        <button id="copy-btn" onclick="copyEmailToClipboard()" class="w-full bg-orange-600 text-white font-black py-3 rounded-xl uppercase text-[10px] tracking-widest hover:bg-white hover:text-stone-900 transition-all">
+                            Copy Email to Clipboard
+                        </button>
+                    </div>
+                </div>
             </div>
+            
+            <button onclick="toggleContactModal(false)" class="mt-8 block w-full text-center text-stone-400 font-bold uppercase text-[10px] tracking-widest hover:text-orange-600 transition-colors">Close Portal</button>
         </div>
     </div>
 
@@ -282,13 +290,19 @@
         function copyEmailToClipboard() {
             const btn = document.getElementById('copy-btn');
             navigator.clipboard.writeText('rodricobs@gmail.com').then(() => {
-                btn.innerText = 'Copied to Clipboard!';
+                btn.innerText = 'Email Copied!';
                 btn.style.backgroundColor = '#4A6741';
                 setTimeout(() => {
-                    btn.innerText = 'Click to Copy Email';
-                    btn.style.backgroundColor = '#1A1C19';
+                    btn.innerText = 'Copy Email to Clipboard';
+                    btn.style.backgroundColor = '#D97757';
                 }, 2000);
             });
+        }
+
+        function copySpecificEmail(type) {
+            copyEmailToClipboard();
+            // Optional: You could trigger a mailto link here too
+            // window.location.href = `mailto:rodricobs@gmail.com?subject=${type}`;
         }
 
         document.getElementById('year').textContent = new Date().getFullYear();
