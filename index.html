@@ -4,31 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ricobs.github.io | Data Integrity & Revenue Strategy</title>
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦅</text></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #FDF8E4; color: #2d241e; }
         header h1 { background: linear-gradient(to right, #92400E, #D97706, #92400E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
+        /* Navigation Styling */
         .tab-button { @apply px-5 py-2 text-sm font-bold transition-all cursor-pointer rounded-lg; color: #78350f; }
         .tab-button.active { @apply bg-amber-600 text-white shadow-md; }
         
+        /* Content Section Styling */
         .tab-content { background: #FFFFFF; @apply p-8 sm:p-12 rounded-3xl shadow-xl border border-amber-100 hidden; animation: fadeIn 0.4s ease-out; }
         .tab-content.active { display: block; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
+        /* Component Styling */
         .impact-card { @apply bg-white p-6 rounded-2xl flex-1 text-center border-2 border-amber-100 shadow-sm transition-all hover:shadow-lg hover:border-amber-400; }
         .code-window { background: #1a1510; @apply p-6 rounded-2xl font-mono text-amber-300 text-sm border-l-8 border-amber-600 shadow-inner my-6; }
         
         .timeline-box { @apply relative pl-8 border-l-2 border-amber-200 mb-10; }
         .timeline-marker { @apply absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-amber-600; }
 
+        /* Shuffler Styling for References */
         .shuffler-container { position: relative; width: 100%; min-height: 450px; @apply rounded-2xl bg-amber-50/50 overflow-hidden; }
         .shuffler-item { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; @apply flex items-center justify-center p-6; }
         .shuffler-item.active { opacity: 1; z-index: 10; }
-        .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg; }
+        .shuffler-item img { @apply max-w-full max-h-full object-contain rounded-lg shadow-sm; }
     </style>
 </head>
 <body class="p-4 sm:p-8 lg:p-12 max-w-5xl mx-auto">
@@ -45,11 +52,11 @@
     </header>
 
     <nav class="flex justify-center flex-wrap gap-4 mb-10 no-print">
-        <a class="tab-button active" data-tab-target="the-vision">The Vision</a>
-        <a class="tab-button" data-tab-target="the-journey">The Journey</a>
-        <a class="tab-button" data-tab-target="the-tools">The Tools</a>
-        <a class="tab-button" data-tab-target="vouched">Vouched</a>
-        <a class="tab-button" data-tab-target="connect">Connect</a>
+        <button class="tab-button active" data-tab-target="the-vision">The Vision</button>
+        <button class="tab-button" data-tab-target="the-journey">The Journey</button>
+        <button class="tab-button" data-tab-target="the-tools">The Tools</button>
+        <button class="tab-button" data-tab-target="vouched">Vouched</button>
+        <button class="tab-button" data-tab-target="connect">Connect</button>
     </nav>
 
     <div id="main-portal">
@@ -78,13 +85,13 @@
         </div>
 
         <div id="the-journey" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-10">The Track Record</h2>
+            <h2 class="text-3xl font-black text-amber-900 mb-10 text-center">The Track Record</h2>
             <div class="max-w-3xl mx-auto">
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
                     <h3 class="text-xl font-black text-amber-900">Database Administrator | Gainwell Technologies</h3>
                     <p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3 italic">2025 - Present</p>
-                    <p class="text-gray-700 leading-relaxed">Securing revenue lifecycles for the NY State Medicaid system. High-volume, high-stakes work where accuracy is the only option.</p>
+                    <p class="text-gray-700 leading-relaxed">Securing revenue lifecycles for the NY State Medicaid system. High-volume, mission-critical work where accuracy is the only option.</p>
                 </div>
                 <div class="timeline-box">
                     <div class="timeline-marker"></div>
@@ -102,12 +109,12 @@
         </div>
 
         <div id="the-tools" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center">My Technical Toolkit</h2>
+            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase tracking-tight">Technical Arsenal</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
                     <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Enterprise SQL</h3>
                     <p class="text-sm text-gray-600 mb-4">Finding the revenue leakage others miss through precise query architecture.</p>
-                    <div class="code-window">SELECT lien_id FROM mes_liens WHERE last_active < NOW()-30;</div>
+                    <div class="code-window">SELECT lien_id FROM revenue_audit WHERE status = 'active';</div>
                 </div>
                 <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
                     <h3 class="font-bold text-amber-900 mb-3 uppercase text-sm">Python Automation</h3>
@@ -118,7 +125,7 @@
         </div>
 
         <div id="vouched" class="tab-content">
-            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center">People I've Helped</h2>
+            <h2 class="text-3xl font-black text-amber-900 mb-8 text-center uppercase tracking-tight">Vouched</h2>
             <div class="shuffler-container">
                 <div class="shuffler-item active"><img src="reference1.png" alt="Reference 1"></div>
                 <div class="shuffler-item"><img src="reference2.png" alt="Reference 2"></div>
@@ -161,6 +168,8 @@
             function showSection(id) {
                 btns.forEach(b => b.classList.toggle('active', b.dataset.tabTarget === id));
                 sections.forEach(s => s.classList.toggle('active', s.id === id));
+                
+                // Clear and restart shuffler only when "Vouched" tab is active
                 clearInterval(slideInterval);
                 if (id === 'vouched') startShuffler();
             }
