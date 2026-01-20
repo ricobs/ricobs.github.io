@@ -40,10 +40,6 @@
         .shuffler-container:hover .progress-filler, .shuffler-container.paused .progress-filler { transition: none !important; width: 0% !important; }
         .active .progress-filler { width: 100%; }
 
-        .slide-counter { position: absolute; top: 20px; right: 20px; @apply bg-white/10 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-white/20 z-10; }
-        .hard-pause-btn { position: absolute; bottom: 20px; right: 20px; @apply z-20 bg-white/10 hover:bg-white/30 backdrop-blur-md text-white px-4 py-2 rounded-xl border border-white/20 text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer flex items-center gap-2; }
-        .shuffler-container.paused .hard-pause-btn { @apply bg-orange-600 border-orange-400; }
-
         /* Timeline Styles */
         .timeline-item { @apply relative pl-12 border-l-2 border-gray-200 pb-12 last:pb-0; }
         .timeline-dot { @apply absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-orange-600 ring-8 ring-white; }
@@ -52,6 +48,10 @@
         /* Fullscreen Lightbox */
         #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; @apply flex flex-col items-center justify-center p-4; animation: fadeIn 0.3s ease; }
         #lightbox img { @apply max-w-[90%] max-h-[80%] rounded-xl shadow-2xl object-contain border-4 border-white/10; }
+        
+        /* Contact Modal Styles */
+        #contact-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; @apply flex items-center justify-center p-6; backdrop-filter: blur(8px); }
+        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -59,9 +59,10 @@
 
     <header class="mb-20">
         <div class="flex flex-col items-start">
-            <div class="relative">
-                <img src="ricobsdatabase.jpg" alt="RICOBS Logo" class="h-40 w-40 object-contain mb-8 rounded-full border-4 border-white shadow-2xl bg-white">
+            <div class="relative cursor-pointer group" onclick="openLightboxFromSrc('ricobsdatabase.jpg')">
+                <img src="ricobsdatabase.jpg" alt="RICOBS Logo" class="h-40 w-40 object-contain mb-8 rounded-full border-4 border-white shadow-2xl bg-white transition-transform group-hover:scale-105">
                 <div class="absolute -bottom-2 -right-2 bg-orange-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">Est. 2021</div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 rounded-full text-white text-[10px] font-bold uppercase">View Logo</div>
             </div>
             <h1 class="text-7xl sm:text-8xl font-black mb-4 uppercase tracking-tighter" style="color: var(--cactus-green);">RICOBS</h1>
             <p class="text-xl text-gray-600 font-medium max-w-3xl leading-relaxed">
@@ -84,24 +85,23 @@
                     <h2 class="text-4xl font-black mb-8 leading-tight italic" style="color: var(--cactus-green);">The Eagle & The Cactus.</h2>
                     <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
                         <p>Currently acting as the <strong>Database Administrator for Gainwell Technologies</strong>, I hold the line on technical integrity to protect <strong>$9M+ in monthly financial recoveries</strong> for the State of New York.</p>
-                        
                         <p>My philosophy is built on three strategic pillars:</p>
                         <ul class="space-y-4">
-                            <li><strong class="text-black">01. Precision Custodianship:</strong> High-stakes data requires an eagle’s eye. I ensure every record is immutable and verified before it enters the stream.</li>
-                            <li><strong class="text-black">02. Revenue Continuity:</strong> Systems must be as resilient as a cactus. I build and maintain database lifecycles that survive high-pressure environments without revenue loss.</li>
-                            <li><strong class="text-black">03. Scalable Logic:</strong> Beyond storage, I optimize data for action, ensuring that information is a catalyst for growth rather than a bottleneck.</li>
+                            <li><strong class="text-black">01. Precision Custodianship:</strong> High-stakes data requires an eagle’s eye for detail.</li>
+                            <li><strong class="text-black">02. Revenue Continuity:</strong> Resilient as a cactus; I build systems that survive high-pressure environments.</li>
+                            <li><strong class="text-black">03. Scalable Logic:</strong> Transforming data into a catalyst for growth.</li>
                         </ul>
                     </div>
                 </div>
-                <div class="space-y-6">
+                <div class="space-y-6 text-center">
                     <div class="bg-stone-50 p-10 rounded-[2rem] border border-stone-200">
-                        <div class="grid grid-cols-2 gap-8 text-center">
-                            <div><p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Monthly Oversight</p></div>
-                            <div><p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Early Startup Hire</p></div>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div><p class="text-4xl font-black" style="color: var(--terracotta);">$9M+</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Monthly Recovery</p></div>
+                            <div><p class="text-4xl font-black" style="color: var(--cactus-green);">#107</p><p class="text-[10px] font-bold text-gray-400 uppercase mt-1">Startup Early Hire</p></div>
                         </div>
                     </div>
-                    <blockquote class="border-l-4 border-orange-600 pl-6 italic text-gray-500 text-xl">
-                        "Data is the foundation of institutional trust. I don't just store it—I safeguard its integrity."
+                    <blockquote class="border-l-4 border-orange-600 pl-6 italic text-gray-500 text-xl text-left">
+                        "Integrity isn't just about data points; it's about the trust those points represent."
                     </blockquote>
                 </div>
             </div>
@@ -115,21 +115,14 @@
                     <span class="badge" style="background:#DBEAFE; color:#1E40AF">Current</span>
                     <h3 class="text-2xl font-black">Database Administrator | Gainwell</h3>
                     <p class="text-sm font-bold text-orange-600 uppercase mb-3">2025 – Present</p>
-                    <p class="text-gray-600">Managing mission-critical database lifecycles for state Medicaid financial recovery systems. Ensuring zero-data loss across complex state infrastructure pipelines.</p>
+                    <p class="text-gray-600">Managing database lifecycles for Medicaid financial recovery systems, protecting millions in monthly state revenue.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot" style="background-color: var(--terracotta);"></div>
-                    <span class="badge" style="background:#F3F4F6; color:#374151">Global Operations</span>
+                    <span class="badge" style="background:#F3F4F6; color:#374151">Logistics</span>
                     <h3 class="text-2xl font-black">QA Analyst | Ritchie Bros.</h3>
                     <p class="text-sm font-bold text-gray-400 uppercase mb-3">2024 – 2025</p>
-                    <p class="text-gray-600">Synchronized logic for global industrial asset auctions. High-volume data verification and cross-market logic synchronization.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background-color: #CBD5E1;"></div>
-                    <span class="badge" style="background:#FEF3C7; color:#92400E">Software</span>
-                    <h3 class="text-2xl font-black">Apprentice | Tech Elevator</h3>
-                    <p class="text-sm font-bold text-gray-400 uppercase mb-3">2023</p>
-                    <p class="text-gray-600">Immersive training in full-stack Java development, SQL database design, and enterprise-grade software development principles.</p>
+                    <p class="text-gray-600">Global industrial asset auction synchronization and cross-market data verification.</p>
                 </div>
             </div>
         </section>
@@ -140,20 +133,16 @@
                 <div class="space-y-4">
                     <h4 class="text-[10px] font-black uppercase text-center text-gray-400 tracking-widest">Certifications</h4>
                     <div class="shuffler-container" id="cert-shuffler">
-                        <div class="slide-counter"><span>1</span> / 3</div>
-                        <button class="hard-pause-btn" onclick="togglePause('cert-shuffler', this, event)"><span class="btn-icon">⏸</span> <span class="btn-text">Pause</span></button>
-                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference1.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference2.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference1.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference2.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                         <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference4.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                     </div>
                 </div>
                 <div class="space-y-4">
                     <h4 class="text-[10px] font-black uppercase text-center text-gray-400 tracking-widest">Professional References</h4>
                     <div class="shuffler-container" id="reco-shuffler">
-                        <div class="slide-counter"><span>1</span> / 5</div>
-                        <button class="hard-pause-btn" onclick="togglePause('reco-shuffler', this, event)"><span class="btn-icon">⏸</span> <span class="btn-text">Pause</span></button>
-                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference3.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
-                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference5.jpg"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item active" onclick="openLightbox(this)"><img src="reference3.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
+                        <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference5.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                         <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference6.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                         <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference7.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
                         <div class="shuffler-item" onclick="openLightbox(this)"><img src="reference8.png"><div class="progress-bar-container"><div class="progress-filler"></div></div></div>
@@ -167,14 +156,33 @@
                 <h2 class="text-white text-5xl font-black mb-8 leading-tight">Growth with Integrity.</h2>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
                     <a href="https://calendly.com/rodricobs" target="_blank" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🦅 Strategy Call</a>
-                    <button onclick="showContactInfo()" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🌵 Contact Rico</button>
+                    <button onclick="toggleContactModal(true)" class="w-full sm:w-auto bg-white text-black font-black py-6 px-12 rounded-2xl shadow-xl hover:bg-orange-600 hover:text-white transition-all">🌵 Direct Email</button>
                 </div>
             </div>
         </section>
     </main>
 
+    <div id="contact-modal" onclick="toggleContactModal(false)">
+        <div class="bg-white p-12 rounded-[3rem] max-w-lg w-full shadow-2xl text-center relative border-8 border-cactus-green" onclick="event.stopPropagation()">
+            <div class="text-6xl mb-6">🌵</div>
+            <h3 class="text-3xl font-black mb-4 uppercase tracking-tight">Business Solutions</h3>
+            <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                Reach out for data strategy, integrity projects, or partnership opportunities.
+            </p>
+            
+            <div class="bg-stone-100 p-4 rounded-xl mb-8 flex items-center justify-between border border-stone-200">
+                <span id="email-text" class="font-bold text-midnight truncate mr-2">rodricobs@gmail.com</span>
+                <button id="copy-btn" onclick="copyEmailToClipboard()" class="bg-cactus-green text-white text-[10px] font-black px-4 py-2 rounded-lg uppercase tracking-widest hover:bg-orange-600 transition-colors shrink-0">
+                    Copy
+                </button>
+            </div>
+            
+            <button onclick="toggleContactModal(false)" class="text-gray-400 font-bold uppercase text-[10px] tracking-widest hover:text-orange-600 transition-colors">Close View</button>
+        </div>
+    </div>
+
     <div id="lightbox" onclick="closeLightbox()">
-        <div id="lightbox-close" class="absolute top-10 right-10 text-white text-5xl cursor-pointer hover:text-orange-600">&times;</div>
+        <div class="absolute top-10 right-10 text-white text-5xl cursor-pointer hover:text-orange-600">&times;</div>
         <img id="lightbox-img" src="">
     </div>
 
@@ -184,8 +192,8 @@
 
     <script>
         let slideStates = {
-            'cert-shuffler': { interval: null, index: 0, isPaused: false },
-            'reco-shuffler': { interval: null, index: 0, isPaused: false }
+            'cert-shuffler': { interval: null, index: 0 },
+            'reco-shuffler': { interval: null, index: 0 }
         };
 
         function showTab(tabId, btn) {
@@ -201,28 +209,23 @@
 
         function startInterval(id) {
             const container = document.getElementById(id);
+            if (!container) return;
             const items = container.querySelectorAll('.shuffler-item');
-            const counter = container.querySelector('.slide-counter span');
             slideStates[id].interval = setInterval(() => {
-                if (!slideStates[id].isPaused && !container.matches(':hover')) {
+                if (!container.matches(':hover')) {
                     items[slideStates[id].index].classList.remove('active');
                     slideStates[id].index = (slideStates[id].index + 1) % items.length;
                     items[slideStates[id].index].classList.add('active');
-                    counter.innerText = slideStates[id].index + 1;
                 }
             }, 4000);
         }
 
-        function togglePause(id, btn, event) {
-            event.stopPropagation();
-            slideStates[id].isPaused = !slideStates[id].isPaused;
-            document.getElementById(id).classList.toggle('paused');
-            btn.querySelector('.btn-icon').innerText = slideStates[id].isPaused ? '▶' : '⏸';
-            btn.querySelector('.btn-text').innerText = slideStates[id].isPaused ? 'Resume' : 'Pause';
+        function openLightbox(el) {
+            openLightboxFromSrc(el.querySelector('img').src);
         }
 
-        function openLightbox(el) {
-            document.getElementById('lightbox-img').src = el.querySelector('img').src;
+        function openLightboxFromSrc(src) {
+            document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').style.display = 'flex';
         }
 
@@ -230,8 +233,30 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        function showContactInfo() {
-            alert("RICOBS BUSINESS INQUIRIES:\n\nPlease email rodricobs@gmail.com with all business solution needs or strategic partnership opportunities.\n\nDirect communication is monitored 24/7.");
+        function toggleContactModal(show) {
+            const modal = document.getElementById('contact-modal');
+            modal.style.display = show ? 'flex' : 'none';
+            // Reset button text if modal is opening
+            if(show) {
+                document.getElementById('copy-btn').innerText = 'Copy';
+            }
+        }
+
+        function copyEmailToClipboard() {
+            const email = document.getElementById('email-text').innerText;
+            const btn = document.getElementById('copy-btn');
+            
+            navigator.clipboard.writeText(email).then(() => {
+                btn.innerText = 'Copied!';
+                btn.style.backgroundColor = '#D97757'; // Change to terracotta for visual cue
+                
+                setTimeout(() => {
+                    btn.innerText = 'Copy';
+                    btn.style.backgroundColor = '#4A6741'; // Reset to cactus green
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
         }
 
         document.getElementById('year').textContent = new Date().getFullYear();
